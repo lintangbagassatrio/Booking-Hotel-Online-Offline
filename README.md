@@ -3,11 +3,11 @@ Aplikasi Sistem Booking Hotel Online & Offline Laravel 8.*
 <h3>Anggota :</h3>
 Angga Saepul Rivian 5520120061 <br>
 Lintang Bagas Satrio 5520120051 <br>
-Nisha Sri Mulyani 5520120055 <br>
+Nisha Sri Mulyani 5520120055 <br><br>
 
 Untuk menjalankan Aplikasi jalankan perintah berikut pada command terminal
 
-## Usage
+## Penggunaan
 
 - Run `composer install`
 - Run `copy .env.example .env`
