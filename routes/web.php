@@ -24,6 +24,7 @@ Auth::routes();
 Route::get('/landingpage', function () {
     return view('landingpage');
 })->name('landingpage')->middleware('auth');
+
 Route::get('/landingpage/detail', function() {
     return view('detail');
 })->name('detail');
