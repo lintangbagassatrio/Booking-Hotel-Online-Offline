@@ -29,4 +29,31 @@ Route::get('/landingpage/detail', function() {
     return view('detail');
 })->name('detail');
 
+// Admin User View
+Route::get('/admin', function () {
+    return view('home');
+})->name('home')->middleware('admin');
+
+Route::get('/admin/user', function () {
+    return view('user');
+})->name('user')->middleware('admin');
+
+// Admin Kamar View
+
+Route::get('/admin/kamar', function () {
+    return view('kamar');
+})->name('kamar')->middleware('admin');
+
+// Admin Reservation View
+
+Route::get('/admin/reservasi', function () {
+    return view('reservasi');
+})->name('reservasi')->middleware('admin');
+
+// Admin Report View
+
+Route::get('/admin/report', function () {
+    return view('report');
+})->name('report')->middleware('admin');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
