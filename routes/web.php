@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingpage');
 });
 
 Auth::routes();
+
+// User View
+Route::get('/landingpage', function () {
+    return view('landingpage');
+})->name('landingpage')->middleware('auth');
+Route::get('/landingpage/detail', function() {
+    return view('detail');
+})->name('detail');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
