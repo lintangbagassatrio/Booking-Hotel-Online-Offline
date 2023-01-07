@@ -152,3 +152,37 @@
 </div>
 
 @stop
+
+@section('js')
+
+<script> 
+        $(function(){ 
+            $(document).on('click','#btn-edit-user', function(){ 
+
+                let id = $(this).data('id'); 
+                
+                $('#image-area').empty(); 
+                
+                $.ajax({ 
+                    type: "get", 
+                    url: "{{url('/admin/ajaxadmin/dataUser')}}/"+id, 
+                    dataType: 'json', 
+                    success: function(res){ 
+                        $('#edit-id').val(res.id); 
+                        $('#edit-name').val(res.name); 
+                        $('#edit-email').val(res.email);
+                        $('#edit-phone').val(res.phone); 
+                        $('#edit-address').val(res.address); 
+                        $('#edit-old-picture').val(res.picture); 
+                    
+                        if (res.picture !== null) { 
+                            $('#image-area').append("<img src='"+baseurl+"/storage/picture_user/"+res.picture+"' width='200px'/>" );
+                        } else { 
+                            $('#image-area').append('[Gambar tidak tersedia]'); 
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+$stop
