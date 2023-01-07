@@ -64,9 +64,33 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @php $no=1; @endphp
+                            @foreach($user as $user)
                             <tr>
-                                <td></td>
+                                <td>{{$no++}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->phone}}</td>
+                                <td>{{$user->address}}</td>
+                                <td>
+                                    @if($user->picture !== null)
+                                        <img src="{{asset('storage/picture_user/'.$user->picture)}}" width="100px">
+                                    @else
+                                            [Gambar Tidak Tersedia]
+                                    @endif
+                                </td>
+                                <td> 
+                                    <div class="btn-group" role="group" aria-label="Basic example"> 
+                                        <button type="button" id="btn-edit-user" class="btn btn-success" data-toggle="modal" data-target="#edit" data-id="{{ $user->id }}">
+                                            Edit
+                                        </button> 
+                                        <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$user->id}}' , '{{$user->name}}' )">
+                                            Hapus
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
