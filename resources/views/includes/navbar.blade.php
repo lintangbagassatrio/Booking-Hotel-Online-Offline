@@ -2,7 +2,7 @@
 <div class="container">
   <nav class="row navbar navbar-expand-lg navbar-light bg-white">
     <a href="{{ route('home') }}" class="navbar-brand">
-      <img src="{{ url('frontend/images/logo.png') }}" alt="Logo NOMADS" />
+      <img src="{{ url('frontend/images/logo.jpg') }}" alt="Logo NOMADS" />
     </a>
     <button
       class="navbar-toggler navbar-toggler-right"
@@ -19,7 +19,11 @@
           <a href="#" class="nav-link active">Home</a>
         </li>
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">Paket Travel</a>
+          <a href="#" class="nav-link">Rooms & Suites</a>
+        </li>
+      
+        <li class="nav-item mx-md-2">
+          <a href="#" class="nav-link">Special Events</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -31,9 +35,9 @@
             Services
           </a>
           <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Breakfast</a>
+            <a href="#" class="dropdown-item">Lunch</a>
+            <a href="#" class="dropdown-item">Dinner</a>
           </div>
         </li>
         <li class="nav-item mx-md-2">
