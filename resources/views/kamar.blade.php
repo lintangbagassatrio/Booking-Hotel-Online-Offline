@@ -60,7 +60,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                        @php $no=1; @endphp
+                            @foreach($kamar as $kamar)
+                            <tr>
+                                <td>{{$no++}}</td>
+                                <td>{{$kamar->kelas}}</td>
+                                <td>{{$kamar->status}}</td>
+                                <td>{{$kamar->harga}}</td>
+                                <td>{{$kamar->fasilitas}}</td>
+                                <td>
+                                    @if($kamar->picture !== null)
+                                        <img src="{{asset('storage/picture_kamar/'.$kamar->picture)}}" width="100px">
+                                    @else
+                                            [Gambar Tidak Tersedia]
+                                    @endif
+                                </td>
+                                <td> 
+                                    <div class="btn-group" role="group" aria-label="Basic example"> 
+                                        <button type="button" id="btn-edit-kamar" class="btn btn-success" data-toggle="modal" data-target="#edit" data-id="{{ $kamar->id }}">
+                                            Edit
+                                        </button> 
+                                        <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$kamar->id}}' , '{{$kamar->kelas}}' )">
+                                            Hapus
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
