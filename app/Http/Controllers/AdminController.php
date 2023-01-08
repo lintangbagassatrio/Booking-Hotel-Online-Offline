@@ -117,6 +117,21 @@ class AdminController extends Controller
         return redirect()->route('admin.user')->with($notification);
     }
 
-    
+    public function delete_user($id) { 
+
+        $user = User::find($id); 
+
+        Storage::delete('public/picture_user/'.$user->cover);
+        
+        $user->delete(); 
+        
+        $success = true; 
+        $message = "Data buku berhasil dihapus"; 
+        
+        return response()->json([ 
+            'success' => $success, 
+            'message' => $message, 
+        ]); 
+    }
 
 }
