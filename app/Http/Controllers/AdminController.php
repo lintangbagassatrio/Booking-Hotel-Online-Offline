@@ -217,4 +217,21 @@ class AdminController extends Controller
 
         return redirect()->route('admin.kamar')->with($notification);
     }
+
+    public function delete_kamar($id) { 
+
+        $kamar = Kamar::find($id); 
+
+        Storage::delete('public/picture_kamar/'.$kamar->cover);
+        
+        $kamar->delete(); 
+        
+        $success = true; 
+        $message = "Data buku berhasil dihapus"; 
+        
+        return response()->json([ 
+            'success' => $success, 
+            'message' => $message, 
+        ]); 
+    }
 }

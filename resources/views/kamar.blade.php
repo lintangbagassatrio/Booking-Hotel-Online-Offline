@@ -174,5 +174,41 @@
                 });
             });
         });
+        
+        function deleteConfirmation(id,kelas) { 
+            swal.fire({ 
+                title: "Hapus?", 
+                type: 'warning', 
+                text: "Apakah ands yakin akan menghapus data buku dengan Kelas " +kelas+"?!", 
+                showCancelButton: !0,
+                confirmButtonText: "Ya, lakukan!", 
+                cancelButtonText: "Tidak, batalkan!", 
+                 
+            }).then (function (e) { 
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
+                    $.ajax({ 
+                        type: 'POST', 
+                        url: "kamar/delete/" + id, 
+                        data: {_token: CSRF_TOKEN}, 
+                        dataType: 'JSON', 
+                        success: function (results) { 
+                            if (results.success === true) { 
+                                swal.fire("Done!", results.message, "success"); 
+                                setTimeout(function(){ 
+                                    location.reload(); 
+                                },1000);
+                            } else { 
+                                 swal.fire("Error!", results.message, "error");
+                            }
+                        }
+                    }); 
+                } else { 
+                    e.dismiss; 
+                } 
+            }, function (dismiss) {
+                 return false; 
+            })
+        }
 </script>
 @stop
