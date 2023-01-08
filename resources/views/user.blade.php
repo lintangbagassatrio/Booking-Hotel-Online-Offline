@@ -15,7 +15,7 @@
             <div class="card-body">
                 <table id="table-data" class="table table-bordered">
                     <thead>
-                        <form method="post" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.user.submit')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Nama</label>
@@ -64,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php $no=1; @endphp
+                            @php $no=1; @endphp
                             @foreach($user as $user)
                             <tr>
                                 <td>{{$no++}}</td>
@@ -109,7 +109,7 @@
                 </button> 
             </div> 
             <div class="modal-body"> 
-                <form method="post"  enctype="multipart/form-data"> 
+                <form method="post" action="{{ route('admin.user.update') }}" enctype="multipart/form-data"> 
                     @method ('PATCH')
                     @csrf
                     <div class="row"> 
@@ -153,6 +153,7 @@
 
 @stop
 
+
 @section('js')
 
 <script> 
@@ -184,5 +185,5 @@
                 });
             });
         });
-    </script>
-$stop
+</script>
+@stop

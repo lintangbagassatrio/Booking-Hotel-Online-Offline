@@ -73,6 +73,13 @@ class AdminController extends Controller
         return redirect()->route('admin.user')->with($notification);
     }
 
+    public function getDataUser($id){
+
+        $user = User::find($id);
+        
+        return response()->json($user);
+    }
+
     public function update_user(Request $req) { 
 
         $user = User::find($req->get('id'));

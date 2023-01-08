@@ -41,6 +41,9 @@ Route::get('/admin/user', function () {
 Route::get('/admin/user', [\App\Http\Controllers\AdminController::class, 'user'])->name('user')->middleware('admin');
 Route::get('/admin/user', [\App\Http\Controllers\AdminController::class, 'user'])->name('admin.user')->middleware('admin');
 Route::post('/admin/user', [\App\Http\Controllers\AdminController::class, 'submit_user'])->name('admin.user.submit')->middleware('admin');
+Route::patch('admin/user/update', [\App\Http\Controllers\AdminController::class, 'update_user'])->name('admin.user.update')->middleware('admin');
+Route::get('admin/ajaxadmin/dataUser/{id}', [\App\Http\Controllers\AdminController::class, 'getDataUser']);
+Route::post('admin/user/update/{id}', [\App\Http\Controllers\AdminController::class, 'delete_user'])->name('admin.user.delete')->middleware('admin');
 
 // Admin Kamar View
 
