@@ -104,7 +104,7 @@
                 </button> 
             </div> 
             <div class="modal-body"> 
-                <form method="post" enctype="multipart/form-data"> 
+                <form method="post" action="{{ route('admin.kamar.update') }}" enctype="multipart/form-data"> 
                     @csrf
                     @method ('PATCH')
                     <div class="row"> 
@@ -144,4 +144,35 @@
         </div> 
     </div> 
 </div>
+@stop
+
+@section('js')
+<script> 
+        $(function(){ 
+            $(document).on('click','#btn-edit-kamar', function(){ 
+                let id = $(this).data('id'); 
+                $('#image-area').empty(); 
+                
+                $.ajax({ 
+                    type: "get", 
+                    url: "{{url('/admin/ajaxadmin/dataKamar')}}/"+id, 
+                    dataType: 'json', 
+                    success: function(res){ 
+                        $('#edit-id').val(res.id); 
+                        $('#edit-kelas').val(res.kelas); 
+                        $('#edit-status').val(res.status);
+                        $('#edit-harga').val(res.harga); 
+                        $('#edit-fasilitas').val(res.fasilitas); 
+                        $('#edit-old-picture').val(res.picture); 
+                    
+                        if (res.picture !== null) { 
+                            $('#image-area').append("<img src='"+baseurl+"/storage/picture_kamar/"+res.picture+"' width='200px'/>" );
+                        } else { 
+                            $('#image-area').append('[Gambar tidak tersedia]'); 
+                        }
+                    },
+                });
+            });
+        });
+</script>
 @stop
