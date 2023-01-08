@@ -15,7 +15,7 @@
             <div class="card-body">
                 <table id="table-data" class="table table-bordered">
                     <thead>
-                        <form method="post" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.kamar.submit')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="kelas">Nama Kelas</label>
@@ -60,8 +60,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>

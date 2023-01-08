@@ -134,4 +134,46 @@ class AdminController extends Controller
         ]); 
     }
 
+    // CRUD Kamar ---------------------------------------------------------------------------------------------------------------
+
+    public function kamar(){
+        $user = Auth::user();
+        $kamar = Kamar::all();
+        return view('kamar', compact('user','kamar'));
+    }
+
+    public function submit_kamar(Request $req){
+
+        $kamar = new Kamar;
+
+        $validate = $req->validate([
+            'kelas' => 'required|max:255', 
+            'status' => 'required', 
+            'harga' => 'required', 
+            'fasilitas' => 'required',
+        ]);
+
+        $kamar->kelas = $req->get('kelas');
+        $kamar->status = $req->get('status');
+        $kamar->harga = $req->get('harga');
+        $kamar->fasilitas = $req->get('fasilitas');
+        
+        if($req->hasFile('picture')){
+            $extension = $req->file('picture')->extension();
+
+            $filename = 'picture_kamar'.time().'.'. $extension;
+
+            $req->file('picture')->storeAs('public/picture_kamar', $filename);
+
+            $kamar->picture = $filename;
+        }
+
+        $kamar->save();
+
+        $notification = array(
+            'message' =>'Data Kamar berhasil ditambahkan', 'alert-type' =>'success'
+        );
+
+        return redirect()->route('admin.kamar')->with($notification);
+    }
 }

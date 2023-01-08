@@ -52,6 +52,10 @@ Route::get('/admin/kamar', function () {
     return view('kamar');
 })->name('kamar')->middleware('admin');
 
+Route::get('/admin/kamar', [\App\Http\Controllers\AdminController::class, 'kamar'])->name('kamar')->middleware('admin');
+Route::get('/admin/kamar', [\App\Http\Controllers\AdminController::class, 'kamar'])->name('admin.kamar')->middleware('admin');
+Route::post('/admin/kamar', [\App\Http\Controllers\AdminController::class, 'submit_kamar'])->name('admin.kamar.submit')->middleware('admin');
+
 // Admin Reservation View
 
 Route::get('/admin/reservasi', function () {
