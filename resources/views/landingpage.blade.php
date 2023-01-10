@@ -69,7 +69,7 @@ HOTELS
   <!-- Header End-->
   
   <!-- Home Room Section Begin -->
-  <section class="hp-room-section">
+  <section class="hp-room-section" id="room">
         <div class="container-fluid">
             <div class="hp-room-items">
                 <div class="row">
@@ -196,11 +196,40 @@ HOTELS
   <!-- Home Room Section End -->
 
   <!-- About Us Section Begin -->
-  
-    <!-- About Us Section End -->
+  <section class="aboutus-section spad" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-text">
+                        <div class="section-title">
+                            <span>About Us</span>
+                            <h2>The pursuit of perfection <br />HOTELS</h2>
+                        </div>
+                        <p>HOTELS is a leading online accommodation site. We’re passionate about
+                            travel. Every day, we inspire and reach millions of travelers.</p>
+                        <p>So when it comes to booking the perfect hotel we’ve got you covered.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-pic">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <img src="{{ url('frontend/images/popular-2.jpg') }}" alt="">
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="{{ url('frontend/images/popular-1.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </section>
+  <!-- About Us Section End -->
 
   <!-- Services Section End -->
-  <section class="services-section spad">
+  </hr>
+  <section class="services-section spad" id="svc">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -277,7 +306,7 @@ HOTELS
     <!-- Services Section End -->
 
   <!-- Testimoni -->
-  <section class="section-testimonial-heading" id="testimonialHeading">
+  <section class="section-testimonial-heading" id="testi">
     <div class="container">
       <div class="row">
         <div class="col text-center">

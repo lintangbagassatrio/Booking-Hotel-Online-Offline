@@ -1,172 +1,190 @@
 @extends('layouts.appp')
-@section('title', 'Detail Travel')
+@section('title', 'Detail Rooms')
 
 @section('content')
 <main>
   <section class="section-details-header"></section>
   <section class="section-details-content">
-    <div class="container">
-      <div class="row">
-        <div class="col p-0">
-          <nav>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                Paket Travel
-              </li>
-              <li class="breadcrumb-item active">
-                Details
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-8 pl-lg-0">
-          <div class="card card-details">
-            <h1></h1>
-            <p>
-             
-            </p>
-           
-                  <div class="gallery">
-                      <div class="xzoom-container">
-                          <img
-                              src=""
-                              class="xzoom"
-                              id="xzoom-default"
-                              xoriginal=""
-                          />
-                      </div>
-                      <div class="xzoom-thumbs">
-                        
-                              <a href="">
-                                  <img
-                                      src=""
-                                      class="xzoom-gallery"
-                                      width="128"
-                                      xpreview=""
-                                  />
-                              </a>
-                         
-                      </div>
-                  </div>
-            
-            <h2>Tentang Wisata</h2>
-          
-            <div class="features row">
-              <div class="col-md-4">
-                <img
-                  src="{{ url('frontend/images/ic_event.png') }}"
-                  alt=""
-                  class="features-image"
-                />
-                <div class="description">
-                  <h3>Featured Event</h3>
-                  <p></p>
-                </div>
-              </div>
-              <div class="col-md-4 border-left">
-                <div class="description">
-                  <img
-                    src="{{ url('frontend/images/ic_language.png') }}"
-                    alt=""
-                    class="features-image"
-                  />
-                  <div class="description">
-                    <h3>Language</h3>
-                    <p></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 border-left">
-                <div class="description">
-                  <img
-                    src="{{ url('frontend/images/ic_foods.png') }}"
-                    alt=""
-                    class="features-image"
-                  />
-                  <div class="description">
-                    <h3>Foods</h3>
-                    <p></p>
-                  </div>
-                </div>
+    <div class="rde-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="rde-text">
+              <h2 style="font-family: 'Playfair Display', serif">Our Rooms</h2>
+              <div class="bt-option">
+                <a href="./home.html">Home</a>
+                <span>Rooms</span>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="card card-details card-right">
-            <h2>Members are going</h2>
-            <div class="members my-2">
-              <img
-                src="/frontend/images/member-1.png"
-                class="member-image mr-1"
-              />
-              <img
-                src="/frontend/images/member-2.png"
-                class="member-image mr-1"
-              />
-              <img
-                src="/frontend/images/member-3.png"
-                class="member-image mr-1"
-              />
-              <img
-                src="/frontend/images/member-4.png"
-                class="member-image mr-1"
-              />
-              <img
-                src="/frontend/images/member-5.png"
-                class="member-image mr-1"
-              />
-            </div>
-            <hr />
-            <h2>Trip Informations</h2>
-            <table class="trip-informations">
-              <tr>
-                <th width="50%">Date of Departure</th>
-                <td width="50%" class="text-right">
-                    
-                </td>
-              </tr>
-              <tr>
-                <th width="50%">Duration</th>
-                <td width="50%" class="text-right">
-                 
-                </td>
-              </tr>
-              <tr>
-                <th width="50%">Type</th>
-                <td width="50%" class="text-right">
-                 
-                </td>
-              </tr>
-              <tr>
-                <th width="50%">Price</th>
-                <td width="50%" class="text-right">
-                  
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="join-container">
-              @auth
-              <form action="" method="post">
-                  @csrf
-                  <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
-                      Join Now
-                  </button>
-              </form>
-              @endauth
-              @guest
-                  <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">
-                      Login or Register to Join
-                  </a>
-              @endguest
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Room Details Section Begin -->
+  <section class="room-details-section spad ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="room-details-item">
+                        <img src="{{ url('frontend/images/room-details.jpg') }}" alt="">
+                        <div class="rd-text">
+                            <div class="rd-title">
+                                <h3 style="font-family: 'Playfair Display', serif;">Premium King Room</h3>
+                                <div class="rdt-right">
+                                    <div class="rating">
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star-half_alt"></i>
+                                    </div>
+                                    <a href="#">Booking Now</a>
+                                </div>
+                            </div>
+                            <h2>159$<span>/Pernight</span></h2>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Size:</td>
+                                        <td>30 ft</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacity:</td>
+                                        <td>Max persion 5</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Bed:</td>
+                                        <td>King Beds</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Services:</td>
+                                        <td>Wifi, Television, Bathroom,...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>Garden and city views, 42-inch HDTV, mini-fridge, coffeemaker, WiFi, signature bath products
+                                Unwind in this room featuring one king-sized Sweet Dreams® Bed with 5 jumbo hypoallergenic down pillows for added comfort. 
+                                The room overlooks the Japanese inspired Kyoto Gardens and iconic downtown world skyline.</p>
+                            <p>Keep your drinks chilled in the mini-fridge Work at the large desk and keep in touch with WiFi
+                                Relax in the chair watching the 42-inch LCD TV with HD channels other amenities include a coffeemaker, 
+                                clock-radio with MP3 connection and a spacious bathroom with signature bath products and a vanity area to spread out and make yourself at home.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rd-reviews">
+                        <h4>Reviews</h4>
+                        <div class="review-item">
+                            <div class="ri-pic">
+                                <img src="{{ url('frontend/images/avatar-1.jpg') }}" alt="">
+                            </div>
+                            <div class="ri-text">
+                                <span>27 Aug 2019</span>
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                                <h5>Brandon Kelley</h5>
+                                <p>This hotel was a great place to stay the staff what extremely helpful. That bar tender(Nathaniel) was awesome and very pleasant to talk to and made my stay very enjoyable. 
+                                  The hotel desk lady, I forget her name, was awesome as well. She change my room for me to a better view, like I asked for. Major kudos to her and the bar tender. 
+                                  When I return to the area again I will definitely stay at this location. Thanks..</p>
+                            </div>
+                        </div>
+                        <div class="review-item">
+                            <div class="ri-pic">
+                                <img src="{{ url('frontend/images/avatar-2.jpg') }}" alt="">
+                            </div>
+                            <div class="ri-text">
+                                <span>27 Aug 2019</span>
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                                <h5>Nate Stanley</h5>
+                                <p>friendly and quick check-in at front desk. Had the pork sliders from The tavern and they were pretty good. Front desk went above and beyond when I could not print something in the business center. 
+                                  Great service. Room was clean and bed was comfortable.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-add">
+                        <h4>Add Review</h4>
+                        <form action="#" class="ra-form">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="Name*">
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="Email*">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div>
+                                        <h5>You Rating:</h5>
+                                        <div class="rating">
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star-half_alt"></i>
+                                        </div>
+                                    </div>
+                                    <textarea placeholder="Your Review"></textarea>
+                                    <button type="submit">Submit Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="room-booking">
+                        <h3 style="font-family: 'Playfair Display', serif;">Your Reservation</h3>
+                        <form action="#">
+                            <div class="check-date">
+                                <label for="date-in">Check In:</label>
+                                <input type="text" class="date-input" id="date-in">
+                                <i class="bi bi-calendar"></i>
+                            </div>
+                            <div class="check-date">
+                                <label for="date-out">Check Out:</label>
+                                <input type="text" class="date-input" id="date-out">
+                                <i class="bi bi-calendar"></i>
+                            </div>
+                            <div class="select-option">
+                                <label for="guest">Guests:</label>
+                                <select id="guest">
+                                    <option value="">1 Person</option>
+                                    <option value="">2 Person</option>
+                                    <option value="">3 Person</option>
+                                    <option value="">4 Person</option>
+                                    <option value="">5 Person</option>
+                                </select>
+                            </div>
+                            <div class="select-option">
+                                <label for="room">Room:</label>
+                                <select id="room">
+                                    <option value="">1 Room</option>
+                                    <option value="">2 Room</option>
+                                    <option value="">3 Room</option>
+                                    <option value="">4 Room</option>
+                                    <option value="">5 Room</option>
+                                </select>
+                            </div>
+                            <button type="submit">Check Availability</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Room Details Section End -->
   </section>
+
+  
 </main>
 @endsection
 

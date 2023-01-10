@@ -16,22 +16,22 @@
     <div class="collapse navbar-collapse" id="navb">
       <ul class="navbar-nav ml-auto mr-3">
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link active">Home</a>
+          <a href="#home" class="nav-link active">Home</a>
         </li>
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">Rooms & Suites</a>
+          <a href="#room" class="nav-link">Rooms & Suites</a>
         </li>
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">About Us</a>
+          <a href="#about" class="nav-link">About Us</a>
         </li>
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">Services</a>
+          <a href="#svc" class="nav-link">Services</a>
         </li>
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">Testimonial</a>
+          <a href="#testi" class="nav-link">Testimonial</a>
         </li>
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">Contact</a>
+          <a href="#contact" class="nav-link">Contact</a>
         </li>
       </ul>
 
