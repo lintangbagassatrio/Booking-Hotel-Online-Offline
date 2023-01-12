@@ -234,4 +234,14 @@ class AdminController extends Controller
             'message' => $message, 
         ]); 
     }
+
+    // CRUD Reservasi ---------------------------------------------------------------------------------------------------------------
+
+    public function reservasi(){
+        $user = Auth::user();
+        $reservasi = reservasi::all();
+        return view('reservasi', compact('user','reservasi'));
+    }
+
+    
 }

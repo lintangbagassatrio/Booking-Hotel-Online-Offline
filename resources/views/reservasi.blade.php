@@ -32,7 +32,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @php $no=1; @endphp
+                    @foreach($reservasi as $reservasi)
+                    <tr>
+                        <td>{{$no++}}</td>
+                        <td>{{$reservasi->users_id}}</td>
+                        <td>{{$reservasi->name}}</td>
+                        <td>{{$reservasi->email}}</td>
+                        <td>{{$reservasi->kamars_id}}</td>
+                        <td>{{$reservasi->kelas}}</td>
+                        <td>{{$reservasi->jumlahkamar}}</td>
+                        <td>{{$reservasi->jumlahorang}}</td>
+                        <td>{{$reservasi->datein}}</td>
+                        <td>{{$reservasi->dateout}}</td>
+                        <td> 
+                            <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$reservasi->id}}' , '{{$reservasi->kelas}}' )">
+                                Hapus
+                            </button>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -67,6 +67,10 @@ Route::get('/admin/reservasi', function () {
     return view('reservasi');
 })->name('reservasi')->middleware('admin');
 
+Route::get('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'reservasi'])->name('reservasi')->middleware('admin');
+Route::get('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'reservasi'])->name('admin.reservasi')->middleware('admin');
+
+
 
 // Admin Report View
 
