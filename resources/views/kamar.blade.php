@@ -15,7 +15,7 @@
             <div class="card-body">
                 <table id="table-data" class="table table-bordered">
                     <thead>
-                        <form method="post" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.kamar.submit')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="kelas">Nama Kelas</label>
@@ -60,8 +60,33 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @php $no=1; @endphp
+                            @foreach($kamar as $kamar)
                             <tr>
+                                <td>{{$no++}}</td>
+                                <td>{{$kamar->kelas}}</td>
+                                <td>{{$kamar->status}}</td>
+                                <td>{{$kamar->harga}}</td>
+                                <td>{{$kamar->fasilitas}}</td>
+                                <td>
+                                    @if($kamar->picture !== null)
+                                        <img src="{{asset('storage/picture_kamar/'.$kamar->picture)}}" width="100px">
+                                    @else
+                                            [Gambar Tidak Tersedia]
+                                    @endif
+                                </td>
+                                <td> 
+                                    <div class="btn-group" role="group" aria-label="Basic example"> 
+                                        <button type="button" id="btn-edit-kamar" class="btn btn-success" data-toggle="modal" data-target="#edit" data-id="{{ $kamar->id }}">
+                                            Edit
+                                        </button> 
+                                        <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$kamar->id}}' , '{{$kamar->kelas}}' )">
+                                            Hapus
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -79,7 +104,7 @@
                 </button> 
             </div> 
             <div class="modal-body"> 
-                <form method="post" enctype="multipart/form-data"> 
+                <form method="post" action="{{ route('admin.kamar.update') }}" enctype="multipart/form-data"> 
                     @csrf
                     @method ('PATCH')
                     <div class="row"> 
@@ -119,4 +144,71 @@
         </div> 
     </div> 
 </div>
+@stop
+
+@section('js')
+<script> 
+        $(function(){ 
+            $(document).on('click','#btn-edit-kamar', function(){ 
+                let id = $(this).data('id'); 
+                $('#image-area').empty(); 
+                
+                $.ajax({ 
+                    type: "get", 
+                    url: "{{url('/admin/ajaxadmin/dataKamar')}}/"+id, 
+                    dataType: 'json', 
+                    success: function(res){ 
+                        $('#edit-id').val(res.id); 
+                        $('#edit-kelas').val(res.kelas); 
+                        $('#edit-status').val(res.status);
+                        $('#edit-harga').val(res.harga); 
+                        $('#edit-fasilitas').val(res.fasilitas); 
+                        $('#edit-old-picture').val(res.picture); 
+                    
+                        if (res.picture !== null) { 
+                            $('#image-area').append("<img src='"+baseurl+"/storage/picture_kamar/"+res.picture+"' width='200px'/>" );
+                        } else { 
+                            $('#image-area').append('[Gambar tidak tersedia]'); 
+                        }
+                    },
+                });
+            });
+        });
+        
+        function deleteConfirmation(id,kelas) { 
+            swal.fire({ 
+                title: "Hapus?", 
+                type: 'warning', 
+                text: "Apakah ands yakin akan menghapus data buku dengan Kelas " +kelas+"?!", 
+                showCancelButton: !0,
+                confirmButtonText: "Ya, lakukan!", 
+                cancelButtonText: "Tidak, batalkan!", 
+                 
+            }).then (function (e) { 
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
+                    $.ajax({ 
+                        type: 'POST', 
+                        url: "kamar/delete/" + id, 
+                        data: {_token: CSRF_TOKEN}, 
+                        dataType: 'JSON', 
+                        success: function (results) { 
+                            if (results.success === true) { 
+                                swal.fire("Done!", results.message, "success"); 
+                                setTimeout(function(){ 
+                                    location.reload(); 
+                                },1000);
+                            } else { 
+                                 swal.fire("Error!", results.message, "error");
+                            }
+                        }
+                    }); 
+                } else { 
+                    e.dismiss; 
+                } 
+            }, function (dismiss) {
+                 return false; 
+            })
+        }
+</script>
 @stop

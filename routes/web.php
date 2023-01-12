@@ -52,11 +52,21 @@ Route::get('/admin/kamar', function () {
     return view('kamar');
 })->name('kamar')->middleware('admin');
 
+Route::get('/admin/kamar', [\App\Http\Controllers\AdminController::class, 'kamar'])->name('kamar')->middleware('admin');
+Route::get('/admin/kamar', [\App\Http\Controllers\AdminController::class, 'kamar'])->name('admin.kamar')->middleware('admin');
+Route::post('/admin/kamar', [\App\Http\Controllers\AdminController::class, 'submit_kamar'])->name('admin.kamar.submit')->middleware('admin');
+Route::patch('admin/kamar/update', [\App\Http\Controllers\AdminController::class, 'update_kamar'])->name('admin.kamar.update')->middleware('admin');
+Route::get('admin/ajaxadmin/dataKamar/{id}', [\App\Http\Controllers\AdminController::class, 'getDataKamar']);
+Route::post('admin/kamar/update/{id}', [\App\Http\Controllers\AdminController::class, 'delete_kamar'])->name('admin.kamar.delete')->middleware('admin');
+Route::post('admin/kamar/delete/{id}', [App\Http\Controllers\AdminController::class,'delete_kamar'])->name('admin.kamar.delete')->middleware('admin');
+
+
 // Admin Reservation View
 
 Route::get('/admin/reservasi', function () {
     return view('reservasi');
 })->name('reservasi')->middleware('admin');
+
 
 // Admin Report View
 
