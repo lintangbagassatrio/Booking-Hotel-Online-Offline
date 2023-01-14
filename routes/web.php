@@ -69,7 +69,11 @@ Route::get('/admin/reservasi', function () {
 
 Route::get('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'reservasi'])->name('reservasi')->middleware('admin');
 Route::get('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'reservasi'])->name('admin.reservasi')->middleware('admin');
-
+Route::post('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'submit_reservasi'])->name('admin.reservasi.submit')->middleware('admin');
+Route::patch('admin/reservasi/update', [\App\Http\Controllers\AdminController::class, 'update_reservasi'])->name('admin.reservasi.update')->middleware('admin');
+Route::get('admin/ajaxadmin/dataReservasi/{id}', [\App\Http\Controllers\AdminController::class, 'getDataReservasi']);
+Route::post('admin/reservasi/update/{id}', [\App\Http\Controllers\AdminController::class, 'delete_reservasi'])->name('admin.reservasi.delete')->middleware('admin');
+Route::post('admin/reservasi/delete/{id}', [App\Http\Controllers\AdminController::class,'delete_reservasi'])->name('admin.reservasi.delete')->middleware('admin');
 
 
 // Admin Report View

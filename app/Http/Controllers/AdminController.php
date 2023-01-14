@@ -238,10 +238,84 @@ class AdminController extends Controller
     // CRUD Reservasi ---------------------------------------------------------------------------------------------------------------
 
     public function reservasi(){
+
+        $kamar = Kamar::all();
+        $user = User::all();
+
         $user = Auth::user();
-        $reservasi = reservasi::all();
-        return view('reservasi', compact('user','reservasi'));
+        $reservasi = Reservasi::all();
+
+        return view('reservasi',compact('user','kamar','reservasi'));
     }
 
+    public function getDataReservasi($id){
+
+        $reservasi = Reservasi::find($id);
+        
+        return response()->json($reservasi);
+    }
+
+    public function submit_reservasi(Request $req)
+    {
+        $validate = $req->validate([
+            'users_id' => 'required',
+            'kamars_id' => 'required',
+            
+        ]);
+
+        $reservasi = new Reservasi;
+        $reservasi->users_id = $req->get('users_id');
+        $reservasi->kamars_id = $req->get('kamars_id');
+        
+
+        $reservasi->save();
+        $notification = array(
+            'message' => 'Data reservasi berhasil ditambahkan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.reservasis')->with($notification);
+    }
+
+    public function update_reservasi(Request $req) { 
+
+        $reservasi = Reservasi::find($req->get('id'));
+
+        $validate = $req->validate([
+            'jumlahkamar' => 'required', 
+            'jumlahorang' => 'required', 
+            'datein' => 'required', 
+            'dateout' => 'required',
+        ]);
+
+        $reservasi->jumlahkamar = $req->get('jumlahkamar');
+        $reservasi->jumlahorang = $req->get('jumlahorang');
+        $reservasi->datein = $req->get('datein');
+        $reservasi->dateout = $req->get('dateout');
+        
+        $reservasi->save(); 
+
+        $notification = array( 
+            'message' => 'Data Reservasi berhasil diubah', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.reservasi')->with($notification);
+    }
+
+    public function delete_Reservasi($id)
+    {
+        $reservasi = Reservasi::find($id);
+
+        $reservasi->delete();
+
+        $success = true;
+        $message = "Data Reservasi berhasil dihapus";
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
     
 }
