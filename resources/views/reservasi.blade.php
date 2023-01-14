@@ -149,16 +149,16 @@
                     <div class="row"> 
                         <div class="col"> 
                         @csrf
-                            <div class="form-group">
-                                <label for="users_id">Id User</label>
-                                <input type="text"class="form-control h-auto" name="users_id" id="edit-users_id" readonly/>
-                            </div>
-                            <div class="form-group">
-                                <label for="kamars_id">Kelas</label>
-                                <input type="text"class="form-control h-auto" name="kamars_id" id="edit-kamars_id" readonly/>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group">
+                                    <label for="kamars_id">Pilih Kelas</label>
+                                    <select name="kamars_id" class="form-control" id="kamars_id">
+                                        @foreach($kamar as $key => $value)
+                                            <option value="{{ $value-> id}}" id="getname" >{{ $value-> kelas}}</option>
+                                        @endforeach
+                                    </select>
+                                    </div>
+                                <div class="row">
+                                <div class="form-group col-6">                                        
                                     <label for="jumlahkamar">Jumlah Kamar</label>
                                     <input type="text"class="form-control h-auto" name="jumlahkamar" id="edit-jumlahkamar" required/>
                                 </div>
@@ -249,8 +249,6 @@
                     url: "{{url('/admin/ajaxadmin/dataReservasi')}}/" + id,
                     datatype: 'json',
                     success: function(res){
-                        $('#edit-users_id').val(res.users_id);
-                        $('#edit-kamars_id').val(res.kamars_id);
                         $('#edit-jumlahkamar').val(res.jumlahkamar);
                         $('#edit-jumlahorang').val(res.jumlahorang);
                         $('#edit-datein').val(res.datein);
