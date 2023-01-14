@@ -39,7 +39,6 @@
                                         <i class="icon_star"></i>
                                         <i class="icon_star-half_alt"></i>
                                     </div>
-                                    <a href="#">Booking Now</a>
                                 </div>
                             </div>
                             <h2>159$<span>/Pernight</span></h2>
@@ -143,39 +142,45 @@
                 <div class="col-lg-4">
                     <div class="room-booking">
                         <h3 style="font-family: 'Playfair Display', serif;">Your Reservation</h3>
-                        <form action="#">
-                            <div class="check-date">
-                                <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
-                                <i class="bi bi-calendar"></i>
-                            </div>
-                            <div class="check-date">
-                                <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out">
-                                <i class="bi bi-calendar"></i>
-                            </div>
-                            <div class="select-option">
-                                <label for="guest">Guests:</label>
-                                <select id="guest">
-                                    <option value="">1 Person</option>
-                                    <option value="">2 Person</option>
-                                    <option value="">3 Person</option>
-                                    <option value="">4 Person</option>
-                                    <option value="">5 Person</option>
-                                </select>
-                            </div>
-                            <div class="select-option">
-                                <label for="room">Room:</label>
-                                <select id="room">
-                                    <option value="">1 Room</option>
-                                    <option value="">2 Room</option>
-                                    <option value="">3 Room</option>
-                                    <option value="">4 Room</option>
-                                    <option value="">5 Room</option>
-                                </select>
-                            </div>
-                            <button type="submit">Check Availability</button>
-                        </form>
+                        <form method="post" action="{{ route('admin.reservasi.submit')}}" enctype="multipart/form-data"> 
+                                        @csrf
+                                        <div class="form-group">
+                                                <input type="text"class="form-control h-auto" value="2" name="users_id" id="tambah-users_id" hidden/>
+                                        </div>
+
+                                        <div class="form-group">
+
+                                                <input type="text"class="form-control h-auto" value="1" name="kamars_id" id="tambah-kamars_id" hidden/>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-6">
+                                                <label for="jumlahkamar">Jumlah Kamar</label>
+                                                <input type="text"class="form-control h-auto" name="jumlahkamar" id="tambah-jumlahkamar" required/>
+                                            </div>
+                                            <div class="form-group col-6">
+                                                <label for="jumlahorang">Jumlah Orang</label>
+                                                    <input type="text"class="form-control h-auto" name="jumlahorang" id="tambah-jumlahorang" required/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-6">
+                                                    <label for="datein">Tanggal Masuk</label>
+                                                    <input type="date"class="form-control h-auto" name="datein" id="tambah-datein" required/>
+                                                </div>
+                                                <div class="form-group col-6">
+                                                    <label for="dateout">Tanggal Keluar</label>
+                                                    <input type="date"class="form-control h-auto" name="dateout" id="tambah-dateout" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"> 
+                                            <input type="hidden" name="id" id="edit-id"/> 
+                                            <input type="hidden" name="old_cover" id="edit-old-cover"/> 
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button> 
+                                            <button type="submit" class="btn btn-success">Tambah</button> 
+                                        </div> 
+                                    </form> 
                     </div>
                 </div>
             </div>
