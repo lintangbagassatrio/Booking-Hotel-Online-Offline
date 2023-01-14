@@ -149,22 +149,28 @@
                     <div class="row"> 
                         <div class="col"> 
                         @csrf
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-6">                                        
+                                    <label for="users_id">Id User</label>
+                                    <input type="text"class="form-control h-auto" name="users_id" id="edit-users_id" readonly/>
+                                </div>
+                                <div class="form-group col-6">
                                     <label for="kamars_id">Pilih Kelas</label>
                                     <select name="kamars_id" class="form-control" id="kamars_id">
                                         @foreach($kamar as $key => $value)
                                             <option value="{{ $value-> id}}" id="getname" >{{ $value-> kelas}}</option>
                                         @endforeach
                                     </select>
-                                    </div>
-                                <div class="row">
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-6">                                        
                                     <label for="jumlahkamar">Jumlah Kamar</label>
                                     <input type="text"class="form-control h-auto" name="jumlahkamar" id="edit-jumlahkamar" required/>
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="jumlahorang">Jumlah Orang</label>
-                                    <input type="text"class="form-control h-auto" name="jumlahorang" id="edit-jumlahorang" required/>
+                                     <input type="text"class="form-control h-auto" name="jumlahorang" id="edit-jumlahorang" required/>
                                 </div>
                             </div>
                             <div class="row">
@@ -249,6 +255,8 @@
                     url: "{{url('/admin/ajaxadmin/dataReservasi')}}/" + id,
                     datatype: 'json',
                     success: function(res){
+                        $('#edit-users_id').val(res.users_id);
+                        $('#edit-kamars_id').val(res.kamars_id);
                         $('#edit-jumlahkamar').val(res.jumlahkamar);
                         $('#edit-jumlahorang').val(res.jumlahorang);
                         $('#edit-datein').val(res.datein);

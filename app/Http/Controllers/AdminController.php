@@ -294,12 +294,16 @@ class AdminController extends Controller
         $reservasi = Reservasi::find($req->get('id'));
 
         $validate = $req->validate([
-            'jumlahkamar' => 'required', 
-            'jumlahorang' => 'required', 
-            'datein' => 'required', 
+            'users_id' => 'required',
+            'kamars_id' => 'required',
+            'jumlahkamar' => 'required',
+            'jumlahorang' => 'required',
+            'datein' => 'required',
             'dateout' => 'required',
         ]);
-
+        
+        $reservasi->users_id = $req->get('users_id');
+        $reservasi->kamars_id = $req->get('kamars_id');
         $reservasi->jumlahkamar = $req->get('jumlahkamar');
         $reservasi->jumlahorang = $req->get('jumlahorang');
         $reservasi->datein = $req->get('datein');
