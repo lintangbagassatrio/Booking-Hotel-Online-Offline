@@ -242,10 +242,13 @@ class AdminController extends Controller
         $kamar = Kamar::all();
         $user = User::all();
 
+        $users = User::all();
+
         $user = Auth::user();
         $reservasi = Reservasi::all();
 
-        return view('reservasi',compact('user','kamar','reservasi'));
+        return view('reservasi',compact('users','kamar','reservasi'));
+
     }
 
     public function getDataReservasi($id){
@@ -260,21 +263,30 @@ class AdminController extends Controller
         $validate = $req->validate([
             'users_id' => 'required',
             'kamars_id' => 'required',
-            
+            'jumlahkamar' => 'required',
+            'jumlahorang' => 'required',
+            'datein' => 'required',
+            'dateout' => 'required',
         ]);
 
         $reservasi = new Reservasi;
+        
         $reservasi->users_id = $req->get('users_id');
         $reservasi->kamars_id = $req->get('kamars_id');
-        
+        $reservasi->jumlahkamar = $req->get('jumlahkamar');
+        $reservasi->jumlahorang = $req->get('jumlahorang');
+        $reservasi->datein = $req->get('datein');
+        $reservasi->dateout = $req->get('dateout');
 
         $reservasi->save();
+
         $notification = array(
             'message' => 'Data reservasi berhasil ditambahkan',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('admin.reservasis')->with($notification);
+        return redirect()->route('admin.reservasi')->with($notification);
+
     }
 
     public function update_reservasi(Request $req) { 

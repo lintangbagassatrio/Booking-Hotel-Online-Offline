@@ -26,6 +26,8 @@
                         <th>No. Kamar</th>
                         <th>Nama Kamar</th>
                         <th>Harga Kamar</th>
+                        <th>Jumlah Kamar</th>
+                        <th>Jumlah Orang</th>
                         <th>Tanggal Masuk</th>
                         <th>Tanggal Keluar</th>
                         <th>Opsi</th>
@@ -42,12 +44,13 @@
                             <td>{{$reservasi->relationToUser->email}}</td>
                             <td>{{$reservasi->relationToKamar->id}}</td>
                             <td>{{$reservasi->relationToKamar->kelas}}</td>
+                            <td>{{$reservasi->relationToKamar->harga}}</td>
                             <td>{{$reservasi->jumlahkamar}}</td>
                             <td>{{$reservasi->jumlahorang}}</td>
                             <td>{{$reservasi->datein}}</td>
                             <td>{{$reservasi->dateout}}</td>
                             <td>
-                                <button type="button" id="btn-edit-reservasi" class="btn btn-success" data-toggle="modal" data-target="#edit">
+                                <button type="button" id="btn-edit-reservasi" class="btn btn-success" data-toggle="modal" data-target="#edit" data-id="{{ $reservasi->id }}">
                                     Edit
                                 </button> 
                                 <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$reservasi->id}}' , '{{$reservasi->relationToUser->name}}' )">
@@ -72,26 +75,26 @@
                                     </button> 
                                 </div> 
                                 <div class="modal-body"> 
-                                    <form method="post"  enctype="multipart/form-data"> 
+                                    <form method="post" action="{{ route('admin.reservasi.submit')}}" enctype="multipart/form-data"> 
                                         @csrf
                                         <div class="form-group">
                                             <label for="users_id">Pilih User</label>
-                                            <select name="users_id" class="form-control" id="users_id">
-                                                <option value="" hidden></option>
-                                                @foreach($reservasi as $key => $value)
-                                                    <option value="{{ $reservasi->id }}">{{ $reservasi->id }}</option>
+                                            <select name="users_id" class="form-control" id="selectuser">
+                                                @foreach($users as $key => $value)
+                                                    <option value="{{ $value-> id}}" id="getname" >{{ $value-> name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+
                                         <div class="form-group">
-                                            <label for="users_id">Pilih Kamar</label>
-                                            <select name="users_id" class="form-control" id="users_id">
-                                                <option value="" hidden></option>
+                                            <label for="kamars_id">Pilih Kelas</label>
+                                            <select name="kamars_id" class="form-control" id="selectkamar">
                                                 @foreach($kamar as $key => $value)
-                                                    <!-- <option value="{{ $value->id }}">{{ $value->name }}</option> -->
+                                                    <option value="{{ $value-> id}}" id="getname" >{{ $value-> kelas}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+
                                         <div class="row">
                                             <div class="form-group col-6">
                                                 <label for="jumlahkamar">Jumlah Kamar</label>
@@ -113,12 +116,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
-                                    <div class="modal-footer"> 
-                                        <input type="hidden" name="id" id="edit-id"/> 
-                                        <input type="hidden" name="old_cover" id="edit-old-cover"/> 
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button> 
-                                        <button type="submit" class="btn btn-success">Update</button> 
+                                        <div class="modal-footer"> 
+                                            <input type="hidden" name="id" id="edit-id"/> 
+                                            <input type="hidden" name="old_cover" id="edit-old-cover"/> 
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button> 
+                                            <button type="submit" class="btn btn-success">Tambah</button> 
+                                        </div> 
                                     </form> 
                                 </div> 
                             </div>
@@ -148,15 +151,11 @@
                         @csrf
                             <div class="form-group">
                                 <label for="users_id">Id User</label>
-                                 <input type="text"class="form-control" name="users_id" id="edit-id" required/>
+                                <input type="text"class="form-control h-auto" name="users_id" id="edit-users_id" readonly/>
                             </div>
                             <div class="form-group">
-                                <label for="name">Nama User</label>
-                                 <input type="text"class="form-control" name="name" id="edit-name" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="kelas">Kelas</label>
-                                <input type="text"class="form-control" name="kelas" id="edit-kelas" required/>
+                                <label for="kamars_id">Kelas</label>
+                                <input type="text"class="form-control h-auto" name="kamars_id" id="edit-kamars_id" readonly/>
                             </div>
                             <div class="row">
                                 <div class="form-group col-6">
@@ -234,6 +233,12 @@
 
 @section('js')
     <script>    
+        // $(document).ready(function () {
+        //         $("#selectuser").change(function () {
+        //             var selectedVal = $("#selectuser option:selected").val();
+        //             $('#name_user').val(selectedVal);
+        //         });
+        //     });
 
         // MENGAMBIL VALUE DARI KUNJUNGAN
         $(function(){
@@ -244,6 +249,8 @@
                     url: "{{url('/admin/ajaxadmin/dataReservasi')}}/" + id,
                     datatype: 'json',
                     success: function(res){
+                        $('#edit-users_id').val(res.users_id);
+                        $('#edit-kamars_id').val(res.kamars_id);
                         $('#edit-jumlahkamar').val(res.jumlahkamar);
                         $('#edit-jumlahorang').val(res.jumlahorang);
                         $('#edit-datein').val(res.datein);
