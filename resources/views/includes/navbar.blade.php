@@ -34,6 +34,7 @@
           <a href="#contact" class="nav-link">Contact</a>
         </li>
       </ul>
+    
 
     @guest
         <form class="form-inline my-2 my-lg-0 d-none d-md-block">
