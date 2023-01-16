@@ -153,7 +153,7 @@ class AdminController extends Controller
         ]);
 
         $kamar->kelas = $req->get('kelas');
-        $kamar->status = $req->get('status');
+        $kamar->status = 'Kosong';
         $kamar->harga = $req->get('harga');
         $kamar->fasilitas = $req->get('fasilitas');
         
@@ -289,10 +289,8 @@ class AdminController extends Controller
 
     }
 
-    public function update_reservasi(Request $req) { 
-
-        $reservasi = Reservasi::find($req->get('id'));
-
+    public function submit_reservasi_user(Request $req)
+    {
         $validate = $req->validate([
             'users_id' => 'required',
             'kamars_id' => 'required',
@@ -301,6 +299,8 @@ class AdminController extends Controller
             'datein' => 'required',
             'dateout' => 'required',
         ]);
+
+        $reservasi = new Reservasi;
         
         $reservasi->users_id = $req->get('users_id');
         $reservasi->kamars_id = $req->get('kamars_id');
@@ -308,15 +308,41 @@ class AdminController extends Controller
         $reservasi->jumlahorang = $req->get('jumlahorang');
         $reservasi->datein = $req->get('datein');
         $reservasi->dateout = $req->get('dateout');
-        
-        $reservasi->save(); 
 
-        $notification = array( 
-            'message' => 'Data Reservasi berhasil diubah', 
+        $reservasi->save();
+
+        $notification = array(
+            'message' => 'Data reservasi berhasil ditambahkan',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('admin.reservasi')->with($notification);
+        return redirect()->route('user.reservasi.submit')->with($notification);
+
+    }
+
+    public function update_reservasi(Request $req) { 
+
+        $reservasi_id = $req->input('reservasi_id');
+        $reservasi = Reservasi::find($reservasi_id);
+
+        // $reservasi = Reservasi::find($req->get('id'));
+
+        if ($req->hasFile('picture')) {
+            $extension = $req->file('picture')->extension(); 
+            $filename = 'picture_reservasi_'.time().'.'.$extension;
+            $req->file('picture')->storeAs('public/picture_reservasi', $filename ); 
+            
+            Storage::delete('public/picture_reservasi/'.$req->get('old_picture')); 
+            $reservasi->jumlahkamar = 1; 
+        } 
+        
+
+        $notification = array( 
+            'message' => 'Data reservasi berhasil diubah', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.user')->with($notification);
     }
 
     public function delete_Reservasi($id)

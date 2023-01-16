@@ -16,7 +16,7 @@ class CreateKamarsTable extends Migration
         Schema::create('kamars', function (Blueprint $table) {
              $table->id('id');
             $table->string('kelas');
-            $table->boolean('status')->default(false);
+            $table->string('status');
             $table->integer('harga');
             $table->string('fasilitas');
             $table->string('picture')->nullable();

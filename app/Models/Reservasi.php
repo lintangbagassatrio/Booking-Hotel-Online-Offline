@@ -28,5 +28,6 @@ class Reservasi extends Model
         'jumlahorang',
         'datein',
         'dateout',
+        'picture',
     ];
 }

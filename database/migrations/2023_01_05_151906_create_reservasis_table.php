@@ -21,6 +21,7 @@ class CreateReservasisTable extends Migration
             $table->integer('jumlahorang');
             $table->date('datein');
             $table->date('dateout');
+            $table->string('picture')->nullable();
             $table->timestamps();
         });
     }

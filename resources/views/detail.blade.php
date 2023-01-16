@@ -142,7 +142,7 @@
                 <div class="col-lg-4">
                     <div class="room-booking">
                         <h3 style="font-family: 'Playfair Display', serif;">Your Reservation</h3>
-                        <form method="post" action="{{ route('admin.reservasi.submit')}}" enctype="multipart/form-data"> 
+                        <form method="post" action="{{ route('user.reservasi.submit')}}" enctype="multipart/form-data"> 
                                         @csrf
                                         <div class="form-group">
                                                 <input type="text"class="form-control h-auto" value="2" name="users_id" id="tambah-users_id" hidden/>
