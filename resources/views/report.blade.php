@@ -75,7 +75,7 @@
     <div class="card-body">
         <div class="card-header">{{__('REPORT USER')}}
             <hr>
-                <a href="#" target="_blank" class="btn btn-secondary">
+                <a href="{{route('admin.print.users')}}" target="_blank" class="btn btn-secondary">
                 <i class="fa fa-print"></i>
                 Cetak PDF
             </a>
@@ -94,8 +94,7 @@
                                 <th>Email</th>
                                 <th>Telepon</th>
                                 <th>Alamat</th>
-                                <th>Foto</th>
-                                <th>Opsi</th>
+                                <th>Picture</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,16 +112,6 @@
                                     @else
                                             [Gambar Tidak Tersedia]
                                     @endif
-                                </td>
-                                <td> 
-                                    <div class="btn-group" role="group" aria-label="Basic example"> 
-                                        <button type="button" id="btn-edit-user" class="btn btn-success" data-toggle="modal" data-target="#edit" data-id="{{ $user->id }}">
-                                            Edit
-                                        </button> 
-                                        <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$user->id}}' , '{{$user->name}}' )">
-                                            Hapus
-                                        </button>
-                                    </div>
                                 </td>
                             </tr>
                             @endforeach

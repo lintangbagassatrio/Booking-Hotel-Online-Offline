@@ -90,4 +90,9 @@ Route::get('/admin/report', function () {
 Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'report'])->name('report')->middleware('admin');
 Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'report'])->name('admin.report')->middleware('admin');
 
+
+// PDF Routes
+
+Route::get('admin/print_users', [App\Http\Controllers\AdminController::class,'print_users'])->name('admin.print.users')->middleware('admin');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

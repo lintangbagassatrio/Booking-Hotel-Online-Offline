@@ -376,4 +376,33 @@ class AdminController extends Controller
         return view('report',compact('report','users','kamar','reservasi'));
 
     }
+
+     // PDF -----------------------------------------------------------------------------------
+
+     public function print_users(){
+        
+        $user = User::all();
+
+        $pdf = PDF::loadview('print_users',['user'=> $user]);
+
+        return $pdf->download('data-user.pdf');
+    }
+
+    public function print_kamars(){
+        
+        $kamars = Kamar::all();
+
+        $pdf = PDF::loadview('print_kamars',['kamars'=> $kamars]);
+
+        return $pdf->download('data-kamars.pdf');
+    }
+
+    public function print_reservasi(){
+        
+        $reservasis = Reservasi::all();
+
+        $pdf = PDF::loadview('print_reser$reservasis',['reser$reservasis'=> $reservasis]);
+
+        return $pdf->download('data-reservasi.pdf');
+    }
 }
