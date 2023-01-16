@@ -390,11 +390,11 @@ class AdminController extends Controller
 
     public function print_kamars(){
         
-        $kamars = Kamar::all();
+        $kamar = Kamar::all();
 
-        $pdf = PDF::loadview('print_kamars',['kamars'=> $kamars]);
+        $pdf = PDF::loadview('print_kamars',['kamar'=> $kamar]);
 
-        return $pdf->download('data-kamars.pdf');
+        return $pdf->download('data-kamar.pdf');
     }
 
     public function print_reservasi(){
