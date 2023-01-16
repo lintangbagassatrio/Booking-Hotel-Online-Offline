@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Models\Kamar;
 use App\Models\Reservasi;
+use App\Models\Report;
 use PDF;
 
 class AdminController extends Controller
@@ -360,4 +361,19 @@ class AdminController extends Controller
         ]);
     }
     
+
+    // Report -----------------------------------------------------------------------------------
+
+    public function report(){
+
+        $kamar = Kamar::all();
+        $users = User::all();
+        $reservasi = Reservasi::all();
+        $report = Report::all();
+
+        $user = Auth::user();
+
+        return view('report',compact('report','users','kamar','reservasi'));
+
+    }
 }

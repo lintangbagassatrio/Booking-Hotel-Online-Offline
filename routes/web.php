@@ -87,4 +87,7 @@ Route::get('/admin/report', function () {
     return view('report');
 })->name('report')->middleware('admin');
 
+Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'report'])->name('report')->middleware('admin');
+Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'report'])->name('admin.report')->middleware('admin');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
