@@ -397,11 +397,11 @@ class AdminController extends Controller
         return $pdf->download('data-kamar.pdf');
     }
 
-    public function print_reservasi(){
+    public function print_reservasis(){
         
         $reservasis = Reservasi::all();
 
-        $pdf = PDF::loadview('print_reser$reservasis',['reser$reservasis'=> $reservasis]);
+        $pdf = PDF::loadview('print_reservasis',['reservasi'=> $reservasis])->setPaper('a4', 'landscape');
 
         return $pdf->download('data-reservasi.pdf');
     }

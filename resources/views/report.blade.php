@@ -13,7 +13,7 @@
     <div class="card-body">
         <div class="card-header">{{__('REPORT RESERVASI')}}
             <hr>
-                <a href="#" target="_blank" class="btn btn-secondary">
+                <a href="{{route('admin.print.reservasis')}}" target="_blank" class="btn btn-secondary">
                 <i class="fa fa-print"></i>
                 Cetak PDF
             </a>

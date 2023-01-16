@@ -95,5 +95,6 @@ Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'repo
 
 Route::get('admin/print_users', [App\Http\Controllers\AdminController::class,'print_users'])->name('admin.print.users')->middleware('admin');
 Route::get('admin/print_kamars', [App\Http\Controllers\AdminController::class,'print_kamars'])->name('admin.print.kamars')->middleware('admin');
+Route::get('admin/print_reservasis', [App\Http\Controllers\AdminController::class,'print_reservasis'])->name('admin.print.reservasis')->middleware('admin');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
