@@ -99,7 +99,11 @@ Route::get('admin/print_reservasis', [App\Http\Controllers\AdminController::clas
 
 // Export Excel
 
-Route::get('admin/report/userexport', [App\Http\Controllers\AdminController::class,'userexport'])->name('admin.report.user')->middleware('admin');
+Route::get('admin/report/userexport', [App\Http\Controllers\AdminController::class,'userexport'])->name('admin.report.exportuser')->middleware('admin');
+
+// Import Export
+
+Route::post('admin/report/userimport', [App\Http\Controllers\AdminController::class,'userimport'])->name('admin.report.importuser')->middleware('admin');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

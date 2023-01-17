@@ -13,6 +13,7 @@ use App\Models\Report;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UserExport;
+use App\Imports\UserImport;
 
 class AdminController extends Controller
 {
@@ -413,5 +414,19 @@ class AdminController extends Controller
     public function userexport() 
     {
         return Excel::download(new UserExport, 'user.xlsx');
+    }
+
+    // Import -----------------------------------------------------------------------------------------------------
+
+    public function userimport(Request $req){
+
+        Excel::import(new UserImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
     }
 }
