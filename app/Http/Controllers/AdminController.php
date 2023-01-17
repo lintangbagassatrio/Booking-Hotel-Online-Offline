@@ -14,8 +14,10 @@ use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UserExport;
 use App\Exports\KamarExport;
+use App\Exports\ReservasiExport;
 use App\Imports\UserImport;
 use App\Imports\KamarImport;
+use App\Imports\ReservasiImport;
 
 class AdminController extends Controller
 {
@@ -421,6 +423,10 @@ class AdminController extends Controller
         return Excel::download(new KamarExport, 'kamar.xlsx');
     }
 
+    public function reservasiexport() {
+        return Excel::download(new ReservasiExport, 'reservasi.xlsx');
+    }
+
     // Import -----------------------------------------------------------------------------------------------------
 
     public function userimport(Request $req){
@@ -438,6 +444,18 @@ class AdminController extends Controller
     public function kamarimport(Request $req){
 
         Excel::import(new KamarImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
+    }
+
+    public function reservasiimport(Request $req){
+
+        Excel::import(new ReservasiImport, $req->file('file'));
 
         $notification = array (
             'message' => 'Import data berhasil dilakukan',
