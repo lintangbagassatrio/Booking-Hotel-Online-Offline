@@ -13,7 +13,9 @@ use App\Models\Report;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UserExport;
+use App\Exports\KamarExport;
 use App\Imports\UserImport;
+use App\Imports\KamarImport;
 
 class AdminController extends Controller
 {
@@ -411,9 +413,12 @@ class AdminController extends Controller
 
     // Export -----------------------------------------------------------------------------------------------------
 
-    public function userexport() 
-    {
+    public function userexport() {
         return Excel::download(new UserExport, 'user.xlsx');
+    }
+
+    public function kamarexport() {
+        return Excel::download(new KamarExport, 'kamar.xlsx');
     }
 
     // Import -----------------------------------------------------------------------------------------------------
@@ -421,6 +426,18 @@ class AdminController extends Controller
     public function userimport(Request $req){
 
         Excel::import(new UserImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
+    }
+
+    public function kamarimport(Request $req){
+
+        Excel::import(new KamarImport, $req->file('file'));
 
         $notification = array (
             'message' => 'Import data berhasil dilakukan',
