@@ -11,6 +11,8 @@ use App\Models\Kamar;
 use App\Models\Reservasi;
 use App\Models\Report;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserExport;
 
 class AdminController extends Controller
 {
@@ -404,5 +406,12 @@ class AdminController extends Controller
         $pdf = PDF::loadview('print_reservasis',['reservasi'=> $reservasis])->setPaper('a4', 'landscape');
 
         return $pdf->download('data-reservasi.pdf');
+    }
+
+    // Export -----------------------------------------------------------------------------------------------------
+
+    public function userexport() 
+    {
+        return Excel::download(new UserExport, 'user.xlsx');
     }
 }

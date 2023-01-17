@@ -80,7 +80,7 @@
                 Cetak PDF
             </a>
             <div class="btn-group" role="group" aria-label="Basic Example">
-                <a href="#" target="_blank" class="btn btn-info">
+                <a href="{{route('admin.report.user')}}" target="_blank" class="btn btn-info">
                     Export
                 </a>
                 <a href="" class="btn btn-warning">Import</a>
