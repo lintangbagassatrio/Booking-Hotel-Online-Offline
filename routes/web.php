@@ -76,7 +76,7 @@ Route::get('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'r
 Route::post('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'submit_reservasi'])->name('admin.reservasi.submit')->middleware('admin');
 Route::post('landingpage/detail/succes', [\App\Http\Controllers\AdminController::class, 'submit_reservasi_user'])->name('user.reservasi.submit')->middleware('auth');
 Route::patch('admin/reservasi/update', [\App\Http\Controllers\AdminController::class, 'update_reservasi'])->name('admin.reservasi.update')->middleware('admin');
-Route::get('admin/ajaxadmin/datareservasi/{id}', [\App\Http\Controllers\AdminController::class, 'getDataReservasi']);
+Route::get('admin/ajaxadmin/dataReservasi/{id}', [\App\Http\Controllers\AdminController::class, 'getDataReservasi']);
 Route::post('admin/reservasi/update/{id}', [\App\Http\Controllers\AdminController::class, 'delete_reservasi'])->name('admin.reservasi.delete')->middleware('admin');
 Route::post('admin/reservasi/delete/{id}', [App\Http\Controllers\AdminController::class,'delete_reservasi'])->name('admin.reservasi.delete')->middleware('admin');
 
