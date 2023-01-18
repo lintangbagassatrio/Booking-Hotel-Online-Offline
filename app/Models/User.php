@@ -20,7 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'address',
         'password',
+        'roles_id',
     ];
 
     /**
@@ -41,4 +44,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public static function getDataUsers(){
+    
+        $users = User::all();
+    
+        $users_filter = [];
+    
+        $no = 1;
+    
+        for($i = 0; $i < $users->count(); $i++){
+            $users_filter[$i]['no'] = $no++ ;
+            $users_filter[$i]['name'] = $users[$i]->name ;
+            $users_filter[$i]['email'] = $users[$i]->email ;
+            $users_filter[$i]['phone'] = $users[$i]->phone ;
+            $users_filter[$i]['address'] = $users[$i]->address ;
+            $users_filter[$i]['password'] = $users[$i]->password ;
+        }
+    
+        return $users_filter;
+    }
 }

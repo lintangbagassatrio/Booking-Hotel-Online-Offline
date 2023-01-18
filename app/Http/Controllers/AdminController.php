@@ -9,7 +9,15 @@ use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Models\Kamar;
 use App\Models\Reservasi;
+use App\Models\Report;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserExport;
+use App\Exports\KamarExport;
+use App\Exports\ReservasiExport;
+use App\Imports\UserImport;
+use App\Imports\KamarImport;
+use App\Imports\ReservasiImport;
 
 class AdminController extends Controller
 {
@@ -153,7 +161,7 @@ class AdminController extends Controller
         ]);
 
         $kamar->kelas = $req->get('kelas');
-        $kamar->status = $req->get('status');
+        $kamar->status = 'Kosong';
         $kamar->harga = $req->get('harga');
         $kamar->fasilitas = $req->get('fasilitas');
         
@@ -233,5 +241,227 @@ class AdminController extends Controller
             'success' => $success, 
             'message' => $message, 
         ]); 
+    }
+
+    // CRUD Reservasi ---------------------------------------------------------------------------------------------------------------
+
+    public function reservasi(){
+
+        $kamar = Kamar::all();
+        $user = User::all();
+
+        $users = User::all();
+
+        $user = Auth::user();
+        $reservasi = Reservasi::all();
+
+        return view('reservasi',compact('users','kamar','reservasi'));
+
+    }
+
+    public function getDataReservasi($id){
+
+        $reservasi = Reservasi::find($id);
+        
+        return response()->json($reservasi);
+    }
+
+    public function submit_reservasi(Request $req)
+    {
+        $validate = $req->validate([
+            'users_id' => 'required',
+            'kamars_id' => 'required',
+            'jumlahkamar' => 'required',
+            'jumlahorang' => 'required',
+            'datein' => 'required',
+            'dateout' => 'required',
+        ]);
+
+        $reservasi = new Reservasi;
+        
+        $reservasi->users_id = $req->get('users_id');
+        $reservasi->kamars_id = $req->get('kamars_id');
+        $reservasi->jumlahkamar = $req->get('jumlahkamar');
+        $reservasi->jumlahorang = $req->get('jumlahorang');
+        $reservasi->datein = $req->get('datein');
+        $reservasi->dateout = $req->get('dateout');
+
+        $reservasi->save();
+
+        $notification = array(
+            'message' => 'Data reservasi berhasil ditambahkan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.reservasi')->with($notification);
+
+    }
+
+    public function submit_reservasi_user(Request $req)
+    {
+        $validate = $req->validate([
+            'users_id' => 'required',
+            'kamars_id' => 'required',
+            'jumlahkamar' => 'required',
+            'jumlahorang' => 'required',
+            'datein' => 'required',
+            'dateout' => 'required',
+        ]);
+
+        $reservasi = new Reservasi;
+        
+        $reservasi->users_id = $req->get('users_id');
+        $reservasi->kamars_id = $req->get('kamars_id');
+        $reservasi->jumlahkamar = $req->get('jumlahkamar');
+        $reservasi->jumlahorang = $req->get('jumlahorang');
+        $reservasi->datein = $req->get('datein');
+        $reservasi->dateout = $req->get('dateout');
+
+        $reservasi->save();
+
+        $notification = array(
+            'message' => 'Data reservasi berhasil ditambahkan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('user.reservasi.submit')->with($notification);
+
+    }
+
+    public function update_reservasi(Request $req) { 
+
+        $reservasi_id = $req->input('reservasi_id');
+        $reservasi = Reservasi::find($reservasi_id);
+
+        // $reservasi = Reservasi::find($req->get('id'));
+
+        if ($req->hasFile('picture')) {
+            $extension = $req->file('picture')->extension(); 
+            $filename = 'picture_reservasi_'.time().'.'.$extension;
+            $req->file('picture')->storeAs('public/picture_reservasi', $filename ); 
+            
+            Storage::delete('public/picture_reservasi/'.$req->get('old_picture')); 
+            $reservasi->jumlahkamar = 1; 
+        } 
+        
+
+        $notification = array( 
+            'message' => 'Data reservasi berhasil diubah', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.user')->with($notification);
+    }
+
+    public function delete_Reservasi($id)
+    {
+        $reservasi = Reservasi::find($id);
+
+        $reservasi->delete();
+
+        $success = true;
+        $message = "Data Reservasi berhasil dihapus";
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
+    
+
+    // Report -----------------------------------------------------------------------------------
+
+    public function report(){
+
+        $kamar = Kamar::all();
+        $users = User::all();
+        $reservasi = Reservasi::all();
+        $report = Report::all();
+
+        $user = Auth::user();
+
+        return view('report',compact('report','users','kamar','reservasi'));
+
+    }
+
+     // PDF -----------------------------------------------------------------------------------
+
+     public function print_users(){
+        
+        $user = User::all();
+
+        $pdf = PDF::loadview('print_users',['user'=> $user]);
+
+        return $pdf->download('data-user.pdf');
+    }
+
+    public function print_kamars(){
+        
+        $kamar = Kamar::all();
+
+        $pdf = PDF::loadview('print_kamars',['kamar'=> $kamar]);
+
+        return $pdf->download('data-kamar.pdf');
+    }
+
+    public function print_reservasis(){
+        
+        $reservasis = Reservasi::all();
+
+        $pdf = PDF::loadview('print_reservasis',['reservasi'=> $reservasis])->setPaper('a4', 'landscape');
+
+        return $pdf->download('data-reservasi.pdf');
+    }
+
+    // Export -----------------------------------------------------------------------------------------------------
+
+    public function userexport() {
+        return Excel::download(new UserExport, 'user.xlsx');
+    }
+
+    public function kamarexport() {
+        return Excel::download(new KamarExport, 'kamar.xlsx');
+    }
+
+    public function reservasiexport() {
+        return Excel::download(new ReservasiExport, 'reservasi.xlsx');
+    }
+
+    // Import -----------------------------------------------------------------------------------------------------
+
+    public function userimport(Request $req){
+
+        Excel::import(new UserImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
+    }
+
+    public function kamarimport(Request $req){
+
+        Excel::import(new KamarImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
+    }
+
+    public function reservasiimport(Request $req){
+
+        Excel::import(new ReservasiImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
     }
 }

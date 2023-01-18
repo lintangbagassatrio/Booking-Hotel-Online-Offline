@@ -16,14 +16,12 @@ class CreateReservasisTable extends Migration
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->constrained();
-            $table->string('name')->references('name')->on('users');
-            $table->string('email')->references('email')->on('users');
             $table->foreignId('kamars_id')->constrained();
-            $table->string('kelas')->references('kelas')->on('kamar');
             $table->integer('jumlahkamar');
             $table->integer('jumlahorang');
             $table->date('datein');
-            $table->string('dateout');
+            $table->date('dateout');
+            $table->string('picture')->nullable();
             $table->timestamps();
         });
     }

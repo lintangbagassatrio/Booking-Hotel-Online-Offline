@@ -16,32 +16,22 @@
     <div class="collapse navbar-collapse" id="navb">
       <ul class="navbar-nav ml-auto mr-3">
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link active">Home</a>
+          <a href="#home" class="nav-link active">Home</a>
         </li>
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">Rooms & Suites</a>
-        </li>
-      
-        <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">Special Events</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a
-            href="#"
-            class="nav-link dropdown-toggle"
-            id="navbardrop"
-            data-toggle="dropdown"
-          >
-            Services
-          </a>
-          <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">Breakfast</a>
-            <a href="#" class="dropdown-item">Lunch</a>
-            <a href="#" class="dropdown-item">Dinner</a>
-          </div>
+          <a href="#room" class="nav-link">Rooms & Suites</a>
         </li>
         <li class="nav-item mx-md-2">
-          <a href="#" class="nav-link">Testimonial</a>
+          <a href="#about" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item mx-md-2">
+          <a href="#svc" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item mx-md-2">
+          <a href="#testi" class="nav-link">Testimonial</a>
+        </li>
+        <li class="nav-item mx-md-2">
+          <a href="#contact" class="nav-link">Contact</a>
         </li>
       </ul>
     
