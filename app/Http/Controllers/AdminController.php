@@ -18,6 +18,8 @@ use App\Exports\ReservasiExport;
 use App\Imports\UserImport;
 use App\Imports\KamarImport;
 use App\Imports\ReservasiImport;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HotelMail;
 
 class AdminController extends Controller
 {
@@ -463,5 +465,16 @@ class AdminController extends Controller
         );
 
         return redirect()->route('admin.report')->with($notification);
+    }
+
+    // Mail -----------------------------------------------------------------------------------
+
+    public function sentMail(){
+
+        $user = User::find(1);
+
+        Mail::to('gtalowsetpc@gmail.com')->send(new HotelMail($user));
+        
+        return redirect()->back();
     }
 }

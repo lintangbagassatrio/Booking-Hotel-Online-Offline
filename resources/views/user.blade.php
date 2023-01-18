@@ -50,7 +50,8 @@
     <div class="col-9">
         <div class="card card-default">
             <div class="card-header">{{__('List User')}}</div>
-                <div class="card-body">
+            <a href="mail" class="btn btn-primary btn-sm">Send Email</a>
+            <div class="card-body">
                     <table id="table-data" class="table table-bordered text-center">
                         <thead>
                             <tr class="text-center">
