@@ -252,9 +252,8 @@ class AdminController extends Controller
     }
 
     public function getDataReservasi($id){
-
         $reservasi = Reservasi::find($id);
-        
+
         return response()->json($reservasi);
     }
 
@@ -321,21 +320,22 @@ class AdminController extends Controller
     }
 
     public function update_reservasi(Request $req) { 
-
-        $reservasi_id = $req->input('reservasi_id');
-        $reservasi = Reservasi::find($reservasi_id);
-
-        // $reservasi = Reservasi::find($req->get('id'));
-
+        $reservasi = Reservasi::find($req->get('id'));
+        
+        $validate = $req->validate([
+            'picture' => 'required', 
+        ]);
+        
         if ($req->hasFile('picture')) {
             $extension = $req->file('picture')->extension(); 
             $filename = 'picture_reservasi_'.time().'.'.$extension;
             $req->file('picture')->storeAs('public/picture_reservasi', $filename ); 
             
             Storage::delete('public/picture_reservasi/'.$req->get('old_picture')); 
-            $reservasi->jumlahkamar = 1; 
+            $reservasi->picture = $filename; 
         } 
         
+        $reservasi->save(); 
 
         $notification = array( 
             'message' => 'Data reservasi berhasil diubah', 

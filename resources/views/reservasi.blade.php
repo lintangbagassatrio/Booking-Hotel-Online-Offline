@@ -48,7 +48,7 @@
                             <td>{{$reservasi->dateout}}</td>
                             <td>
                                 @if($reservasi->picture !== null)
-                                    <img src="{{asset('storage/picture_kamar/'.$kamar->picture)}}" width="100px">
+                                    <img src="{{asset('storage/picture_reservasi/'.$reservasi->picture)}}" width="100px">
                                 @else
                                     [Tidak Ada]
                                 @endif
@@ -121,8 +121,6 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer"> 
-                                            <input type="hidden" name="id" id="edit-id"/> 
-                                            <input type="hidden" name="old_cover" id="edit-old-cover"/> 
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button> 
                                             <button type="submit" class="btn btn-success">Tambah</button> 
                                         </div> 
@@ -154,12 +152,16 @@
                         <div class="col"> 
                         @csrf
                             <div class="form-group" id="image-area"></div> 
-                            <div class="form-group"> 
-                                <label for="edit-picture">Tambah Bukti Pembayaran</label> 
-                                <input type="file" class="form-control h-auto" name="picture" id="edit-picture"/> 
+                                <div class="form-group"> 
+                                    <label for="edit-picture">Tambah Bukti Pembayaran</label> 
+                                    <input type="file" class="form-control h-auto" name="picture" id="edit-picture"/> 
+                                </div> 
                             </div> 
+                        <div class="form-group"> 
+                                <label for="edit-id">Id</label> 
+                                <input type="text" class="form-control h-auto" name="oldid" id="old_id" val="" placeholder="ini id"/> 
                         </div> 
-                    </div> 
+                    </div>
                 </div> 
                 <div class="modal-footer"> 
                     <input type="hidden" name="id" id="edit-id"/> 
@@ -225,12 +227,14 @@
             $(document).on('click','#btn-edit-reservasi', function(){ 
                 let id = $(this).data('id'); 
                 $('#image-area').empty(); 
+                $('#old_id').val(id);
                 
                 $.ajax({ 
                     type: "get", 
                     url: "{{url('/admin/ajaxadmin/dataReservasi')}}/"+id, 
                     dataType: 'json', 
-                    success: function(res){    
+                    success: function(res){   
+                        $('#edit-id').val(res.id); 
                         if (res.picture !== null) { 
                             $('#image-area').append("<img src='"+baseurl+"/storage/picture_reservasi/"+res.picture+"' width='200px'/>" );
                         } else { 
