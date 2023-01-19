@@ -88,4 +88,26 @@ Route::get('/admin/report', function () {
     return view('report');
 })->name('report')->middleware('admin');
 
+Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'report'])->name('report')->middleware('admin');
+Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'report'])->name('admin.report')->middleware('admin');
+
+// PDF Routes
+
+Route::get('admin/print_users', [App\Http\Controllers\AdminController::class,'print_users'])->name('admin.print.users')->middleware('admin');
+Route::get('admin/print_kamars', [App\Http\Controllers\AdminController::class,'print_kamars'])->name('admin.print.kamars')->middleware('admin');
+Route::get('admin/print_reservasis', [App\Http\Controllers\AdminController::class,'print_reservasis'])->name('admin.print.reservasis')->middleware('admin');
+
+// Export Excel
+
+Route::get('admin/report/userexport', [App\Http\Controllers\AdminController::class,'userexport'])->name('admin.report.exportuser')->middleware('admin');
+Route::get('admin/report/kamarexport', [App\Http\Controllers\AdminController::class,'kamarexport'])->name('admin.report.exportkamar')->middleware('admin');
+Route::get('admin/report/reservasiexport', [App\Http\Controllers\AdminController::class,'reservasiexport'])->name('admin.report.exportreservasi')->middleware('admin');
+
+// Import Export
+
+Route::post('admin/report/userimport', [App\Http\Controllers\AdminController::class,'userimport'])->name('admin.report.importuser')->middleware('admin');
+Route::post('admin/report/kamarimport', [App\Http\Controllers\AdminController::class,'kamarimport'])->name('admin.report.importkamar')->middleware('admin');
+Route::post('admin/report/reservasiimport', [App\Http\Controllers\AdminController::class,'reservasiimport'])->name('admin.report.importreservasi')->middleware('admin');
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

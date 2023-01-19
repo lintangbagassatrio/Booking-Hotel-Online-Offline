@@ -10,7 +10,15 @@ use App\Models\User;
 use App\Models\Kamar;
 use App\Models\Reservasi;
 use App\Models\Checkout;
+use App\Models\Report;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserExport;
+use App\Exports\KamarExport;
+use App\Exports\ReservasiExport;
+use App\Imports\UserImport;
+use App\Imports\KamarImport;
+use App\Imports\ReservasiImport;
 
 class AdminController extends Controller
 {
@@ -394,4 +402,100 @@ class AdminController extends Controller
         ]);
     }
     
+
+    // Report -----------------------------------------------------------------------------------
+
+    public function report(){
+
+        $kamar = Kamar::all();
+        $users = User::all();
+        $reservasi = Reservasi::all();
+        $report = Report::all();
+
+        $user = Auth::user();
+
+        return view('report',compact('report','users','kamar','reservasi'));
+
+    }
+
+     // PDF -----------------------------------------------------------------------------------
+
+     public function print_users(){
+        
+        $user = User::all();
+
+        $pdf = PDF::loadview('print_users',['user'=> $user]);
+
+        return $pdf->download('data-user.pdf');
+    }
+
+    public function print_kamars(){
+        
+        $kamar = Kamar::all();
+
+        $pdf = PDF::loadview('print_kamars',['kamar'=> $kamar]);
+
+        return $pdf->download('data-kamar.pdf');
+    }
+
+    public function print_reservasis(){
+        
+        $reservasis = Reservasi::all();
+
+        $pdf = PDF::loadview('print_reservasis',['reservasi'=> $reservasis])->setPaper('a4', 'landscape');
+
+        return $pdf->download('data-reservasi.pdf');
+    }
+
+    // Export -----------------------------------------------------------------------------------------------------
+
+    public function userexport() {
+        return Excel::download(new UserExport, 'user.xlsx');
+    }
+
+    public function kamarexport() {
+        return Excel::download(new KamarExport, 'kamar.xlsx');
+    }
+
+    public function reservasiexport() {
+        return Excel::download(new ReservasiExport, 'reservasi.xlsx');
+    }
+
+    // Import -----------------------------------------------------------------------------------------------------
+
+    public function userimport(Request $req){
+
+        Excel::import(new UserImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
+    }
+
+    public function kamarimport(Request $req){
+
+        Excel::import(new KamarImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
+    }
+
+    public function reservasiimport(Request $req){
+
+        Excel::import(new ReservasiImport, $req->file('file'));
+
+        $notification = array (
+            'message' => 'Import data berhasil dilakukan',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.report')->with($notification);
+    }
 }
