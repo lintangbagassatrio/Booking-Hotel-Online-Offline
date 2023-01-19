@@ -11,17 +11,26 @@ class HotelMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $user;
+    public $user;
 
-    public function __construct()
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($user)
     {
         $this->user = $user;
     }
 
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
     public function build()
     {
-        return $this->from('admin@example.com')
-                    ->view('notifmail')
-                    ->with(['user' => $this->user]);
+        return $this->from('brobrogaming5@gmail.com')
+                    ->view('mail');
     }
 }
