@@ -18,9 +18,9 @@ class HotelMail extends Mailable
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -30,7 +30,6 @@ class HotelMail extends Mailable
      */
     public function build()
     {
-        return $this->from('brobrogaming5@gmail.com')
-                    ->view('mail');
+        return $this->view('mail');
     }
 }
