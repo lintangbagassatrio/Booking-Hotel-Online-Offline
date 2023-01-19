@@ -158,8 +158,12 @@
                                 </div> 
                             </div> 
                         <div class="form-group"> 
-                                <label for="edit-id">Id</label> 
-                                <input type="text" class="form-control h-auto" name="oldid" id="old_id" val="" placeholder="ini id"/> 
+                            <input type="text" class="form-control" name="users_id" id="edit-users_id" hidden/>
+                            <input type="text" class="form-control" name="kamars_id" id="edit-kamars_id" hidden/>
+                            <input type="text" class="form-control" name="jumlahkamar" id="edit-jumlahkamar" hidden/>
+                            <input type="text" class="form-control" name="jumlahorang" id="edit-jumlahorang" hidden/>
+                            <input type="text" class="form-control" name="datein" id="edit-datein" hidden/>
+                            <input type="text" class="form-control" name="dateout" id="edit-dateout" hidden/>
                         </div> 
                     </div>
                 </div> 
@@ -178,34 +182,51 @@
     <div class="card card-default">
     <div class="card-header">{{__('CHECK OUT')}}</div>
         <div class="card-body">
-            <table id="table-data" class="table table-bordered text-center">
+        <table id="table-data" class="table table-bordered text-center">
                 <thead>
                     <tr class="text-center">
-                        <th>Reservasi ID</th>
-                        <th>User ID</th>
+                        <th>No</th>
+                        <th>Res. ID</th>    
                         <th>Nama</th>
-                        <th>Kelas</th>
-                        <th>No. Kamar</th>
-                        <th>Durasi</th>
+                        <th>Email</th>
+                        <th>Nama Kamar</th>
+                        <th>Harga Kamar</th>
+                        <th>Jumlah Kamar</th>
+                        <th>Jumlah Orang</th>
+                        <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
+                        <th>Bukti Pembayaran</th>
                         <th>Opsi</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                        <td>Angga</td>
-                        <td>Angga</td>
-                        <td>Angga</td>
-                        <td>Angga</td>
-                        <td>Angga</td>
-                        <td>Angga</td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Basic example"> 
-                                <button type="button" class="btn btn-danger" >
-                                    Check Out / Hapus
+                    @php $no=1; @endphp
+                    @foreach($checkout as $checkout)
+                        <tr>
+                            <td>{{$no++}}</td>
+                            <td>{{$checkout->id}}</td>
+                            <td>{{$checkout->relationToUser->name}}</td>
+                            <td>{{$checkout->relationToUser->email}}</td>
+                            <td>{{$checkout->relationToKamar->kelas}}</td>
+                            <td>{{$checkout->relationToKamar->harga}}</td>
+                            <td>{{$checkout->jumlahkamar}}</td>
+                            <td>{{$checkout->jumlahorang}}</td>
+                            <td>{{$checkout->datein}}</td>
+                            <td>{{$checkout->dateout}}</td>
+                            <td>
+                                @if($checkout->picture !== null)
+                                    <img src="{{asset('storage/picture_checkout/'.$checkout->picture)}}" width="100px">
+                                @else
+                                    [Tidak Ada]
+                                @endif
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" onclick="deleteConfirmation2('{{$checkout->id}}' , '{{$checkout->relationToUser->name}}' )">
+                                    CO/DEL
                                 </button>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -235,6 +256,13 @@
                     dataType: 'json', 
                     success: function(res){   
                         $('#edit-id').val(res.id); 
+                        $('#edit-users_id').val(res.users_id); 
+                        $('#edit-kamars_id').val(res.kamars_id);
+                        $('#edit-jumlahkamar').val(res.jumlahkamar); 
+                        $('#edit-jumlahorang').val(res.jumlahorang); 
+                        $('#edit-datein').val(res.datein); 
+                        $('#edit-dateout').val(res.dateout); 
+                        $('#edit-old-picture').val(res.picture); 
                         if (res.picture !== null) { 
                             $('#image-area').append("<img src='"+baseurl+"/storage/picture_reservasi/"+res.picture+"' width='200px'/>" );
                         } else { 
@@ -280,5 +308,40 @@
                  return false; 
             })
         } 
+        function deleteConfirmation2(id,name) { 
+            swal.fire({ 
+                title: "Hapus?", 
+                type: 'warning', 
+                text: "Apakah ands yakin akan menghapus data dengan Nama " +name+"?!", 
+                showCancelButton: !0,
+                confirmButtonText: "Ya, lakukan!", 
+                cancelButtonText: "Tidak, batalkan!", 
+                 
+            }).then (function (e) { 
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
+                    $.ajax({ 
+                        type: 'POST', 
+                        url: "checkout/delete/" + id, 
+                        data: {_token: CSRF_TOKEN}, 
+                        dataType: 'JSON', 
+                        success: function (results) { 
+                            if (results.success === true) { 
+                                swal.fire("Done!", results.message, "success"); 
+                                setTimeout(function(){ 
+                                    location.reload(); 
+                                },1000);
+                            } else { 
+                                 swal.fire("Error!", results.message, "error");
+                            }
+                        }
+                    }); 
+                } else { 
+                    e.dismiss; 
+                } 
+            }, function (dismiss) {
+                 return false; 
+            })
+        }
     </script>
 @stop
