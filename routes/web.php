@@ -109,5 +109,8 @@ Route::post('admin/report/userimport', [App\Http\Controllers\AdminController::cl
 Route::post('admin/report/kamarimport', [App\Http\Controllers\AdminController::class,'kamarimport'])->name('admin.report.importkamar')->middleware('admin');
 Route::post('admin/report/reservasiimport', [App\Http\Controllers\AdminController::class,'reservasiimport'])->name('admin.report.importreservasi')->middleware('admin');
 
+// Mail
+
+Route::get('/email', [\App\Http\Controllers\AdminController::class,'sentMail'])->name('email');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

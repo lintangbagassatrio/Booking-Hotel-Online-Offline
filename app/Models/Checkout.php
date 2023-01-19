@@ -21,4 +21,5 @@ class Checkout extends Model
     {
         return $this->belongsTo(Reservasi::class, 'reservasis_id');
     }
+
 }

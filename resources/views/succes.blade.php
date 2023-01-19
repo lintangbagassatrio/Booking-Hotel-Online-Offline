@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    CEK
-</body>
-</html>
+@extends('layouts.appp')
+
+
+
+@section('content')
+<main>
+    <section class="section-details-header"></section>
+    <div class="card text-center">
+        <div class="card-body">
+            <img src="{{ url('frontend/images/success.png') }}" alt="" style="width: 100px;">
+            <h5 class="card-title">Succsessful</h5>
+            <p class="card-text">Thank You For Booking in HOTELS.</p>
+            <a href="{{route('landingpage')}}" class="btn btn-primary">Go to HOTELS</a>
+        </div>
+    </div>
+</main>
+@endsection

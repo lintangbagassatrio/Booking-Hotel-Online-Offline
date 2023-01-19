@@ -19,6 +19,8 @@ use App\Exports\ReservasiExport;
 use App\Imports\UserImport;
 use App\Imports\KamarImport;
 use App\Imports\ReservasiImport;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HotelMail;
 
 class AdminController extends Controller
 {
@@ -324,6 +326,8 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
 
+        Mail::to('test@gmail.com')->send(new HotelMail());
+
         return redirect()->route('user.reservasi.submit')->with($notification);
 
     }
@@ -498,4 +502,5 @@ class AdminController extends Controller
 
         return redirect()->route('admin.report')->with($notification);
     }
+
 }
