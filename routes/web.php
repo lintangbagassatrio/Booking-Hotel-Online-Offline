@@ -29,9 +29,9 @@ Route::get('/landingpage/detail', function() {
     return view('detail');
 })->name('detail');
 
-Route::get('/landingpage/detail/succes', function () {
-    return view('succes');
-})->name('succes')->middleware('auth');
+Route::get('/landingpage/detail/success', function () {
+    return view('success');
+})->name('success')->middleware('auth');
 
 // Admin User View
 Route::get('/admin', function () {
@@ -74,7 +74,7 @@ Route::get('/admin/reservasi', function () {
 Route::get('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'reservasi'])->name('reservasi')->middleware('admin');
 Route::get('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'reservasi'])->name('admin.reservasi')->middleware('admin');
 Route::post('/admin/reservasi', [\App\Http\Controllers\AdminController::class, 'submit_reservasi'])->name('admin.reservasi.submit')->middleware('admin');
-Route::post('landingpage/detail/succes', [\App\Http\Controllers\AdminController::class, 'submit_reservasi_user'])->name('user.reservasi.submit')->middleware('auth');
+Route::post('landingpage/detail/success', [\App\Http\Controllers\AdminController::class, 'submit_reservasi_user'])->name('user.reservasi.submit')->middleware('auth');
 Route::patch('admin/reservasi/update', [\App\Http\Controllers\AdminController::class, 'update_reservasi'])->name('admin.reservasi.update')->middleware('admin');
 Route::get('admin/ajaxadmin/dataReservasi/{id}', [\App\Http\Controllers\AdminController::class, 'getDataReservasi']);
 Route::post('admin/reservasi/update/{id}', [\App\Http\Controllers\AdminController::class, 'delete_reservasi'])->name('admin.reservasi.delete')->middleware('admin');
