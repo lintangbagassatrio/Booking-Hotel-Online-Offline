@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Checkout extends Model
 {
     use HasFactory;
+
+    public function relationToUser()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
+    public function relationToKamar()
+    {
+        return $this->belongsTo(Kamar::class, 'kamars_id');
+    }
+    public function relationToReservasi()
+    {
+        return $this->belongsTo(Reservasi::class, 'reservasis_id');
+    }
+
 }

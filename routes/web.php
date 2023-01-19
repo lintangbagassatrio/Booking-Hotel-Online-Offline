@@ -79,6 +79,7 @@ Route::patch('admin/reservasi/update', [\App\Http\Controllers\AdminController::c
 Route::get('admin/ajaxadmin/dataReservasi/{id}', [\App\Http\Controllers\AdminController::class, 'getDataReservasi']);
 Route::post('admin/reservasi/update/{id}', [\App\Http\Controllers\AdminController::class, 'delete_reservasi'])->name('admin.reservasi.delete')->middleware('admin');
 Route::post('admin/reservasi/delete/{id}', [App\Http\Controllers\AdminController::class,'delete_reservasi'])->name('admin.reservasi.delete')->middleware('admin');
+Route::post('admin/checkout/delete/{id}', [App\Http\Controllers\AdminController::class,'delete_reservasi2'])->name('admin.checkout.delete')->middleware('admin');
 
 
 // Admin Report View
