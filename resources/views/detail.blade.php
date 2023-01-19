@@ -145,7 +145,7 @@
                         <form method="post" action="{{ route('user.reservasi.submit')}}" enctype="multipart/form-data"> 
                                         @csrf
                                         <div class="form-group">
-                                                <input type="text"class="form-control h-auto" value="7" name="users_id" id="tambah-users_id" hidden/>
+                                                <input type="text"class="form-control h-auto" value="1" name="users_id" id="tambah-users_id" hidden/>
                                         </div>
 
                                         <div class="form-group">

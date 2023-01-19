@@ -55,13 +55,7 @@
                             <td>{{$reservasi->jumlahorang}}</td>
                             <td>{{$reservasi->datein}}</td>
                             <td>{{$reservasi->dateout}}</td>
-                            <td>
-                                @if($reservasi->picture !== null)
-                                    <img src="{{asset('storage/picture_kamar/'.$kamar->picture)}}" width="100px">
-                                @else
-                                    [Tidak Ada]
-                                @endif
-                            </td>
+                            <td>{{$reservasi->picture}}</td>
                         </tr>
                     @endforeach
                 </tbody>
