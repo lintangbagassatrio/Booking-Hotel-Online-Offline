@@ -10,7 +10,7 @@
             <img src="{{ url('frontend/images/success.png') }}" alt="" style="width: 100px;">
             <h5 class="card-title">Succsessful</h5>
             <p class="card-text">Thank You For Booking in HOTELS.</p>
-            <a href="#" class="btn btn-primary">Go to HOTELS</a>
+            <a href="{{route('landingpage')}}" class="btn btn-primary">Go to HOTELS</a>
         </div>
     </div>
 </main>

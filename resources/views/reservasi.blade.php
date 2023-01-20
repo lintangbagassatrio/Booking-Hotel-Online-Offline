@@ -180,9 +180,9 @@
 
 <div class="container-fluid">
     <div class="card card-default">
-    <div class="card-header">{{__('CHECK OUT')}}</div>
+    <div class="card-header">{{__('List Check In')}}</div>
         <div class="card-body">
-        <table id="table-data" class="table table-bordered text-center">
+            <table id="table-data" class="table table-bordered text-center">
                 <thead>
                     <tr class="text-center">
                         <th>No</th>
@@ -237,13 +237,6 @@
 
 @section('js')
     <script>    
-        // $(document).ready(function () {
-        //         $("#selectuser").change(function () {
-        //             var selectedVal = $("#selectuser option:selected").val();
-        //             $('#name_user').val(selectedVal);
-        //         });
-        //     });
-
         $(function(){ 
             $(document).on('click','#btn-edit-reservasi', function(){ 
                 let id = $(this).data('id'); 

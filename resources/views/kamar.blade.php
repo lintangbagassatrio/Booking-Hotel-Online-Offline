@@ -76,14 +76,12 @@
                                     @endif
                                 </td>
                                 <td> 
-                                    <div class="btn-group" role="group" aria-label="Basic example"> 
                                         <button type="button" id="btn-edit-kamar" class="btn btn-success" data-toggle="modal" data-target="#edit" data-id="{{ $kamar->id }}">
                                             Edit
                                         </button> 
                                         <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$kamar->id}}' , '{{$kamar->kelas}}' )">
                                             Hapus
                                         </button>
-                                    </div>
                                 </td>
                             </tr>
                             @endforeach

@@ -50,7 +50,7 @@
     <div class="col-9">
         <div class="card card-default">
             <div class="card-header">{{__('List User')}}</div>
-                <div class="card-body">
+            <div class="card-body">
                     <table id="table-data" class="table table-bordered text-center">
                         <thead>
                             <tr class="text-center">
@@ -80,14 +80,12 @@
                                     @endif
                                 </td>
                                 <td> 
-                                    <div class="btn-group" role="group" aria-label="Basic example"> 
                                         <button type="button" id="btn-edit-user" class="btn btn-success" data-toggle="modal" data-target="#edit" data-id="{{ $user->id }}">
                                             Edit
                                         </button> 
                                         <button type="button" class="btn btn-danger" onclick="deleteConfirmation('{{$user->id}}' , '{{$user->name}}' )">
                                             Hapus
                                         </button>
-                                    </div>
                                 </td>
                             </tr>
                             @endforeach

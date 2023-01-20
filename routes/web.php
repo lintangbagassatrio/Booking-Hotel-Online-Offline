@@ -89,7 +89,9 @@ Route::get('/admin/report', function () {
 })->name('report')->middleware('admin');
 
 Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'report'])->name('report')->middleware('admin');
-Route::get('/admin/report', [\App\Http\Controllers\AdminController::class, 'report'])->name('admin.report')->middleware('admin');
+Route::get('/admin/laporan-user', [\App\Http\Controllers\AdminController::class, 'report_user'])->name('report.user')->middleware('admin');
+Route::get('/admin/laporan-kamar', [\App\Http\Controllers\AdminController::class, 'report_kamar'])->name('report.kamar')->middleware('admin');
+Route::get('/admin/laporan-reservasi', [\App\Http\Controllers\AdminController::class, 'report_reservasi'])->name('report.reservasi')->middleware('admin');
 
 // PDF Routes
 
@@ -109,5 +111,8 @@ Route::post('admin/report/userimport', [App\Http\Controllers\AdminController::cl
 Route::post('admin/report/kamarimport', [App\Http\Controllers\AdminController::class,'kamarimport'])->name('admin.report.importkamar')->middleware('admin');
 Route::post('admin/report/reservasiimport', [App\Http\Controllers\AdminController::class,'reservasiimport'])->name('admin.report.importreservasi')->middleware('admin');
 
+// Mail
+
+Route::get('/email', [\App\Http\Controllers\AdminController::class,'sentMail'])->name('email');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

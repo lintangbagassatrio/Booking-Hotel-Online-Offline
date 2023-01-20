@@ -19,6 +19,8 @@ use App\Exports\ReservasiExport;
 use App\Imports\UserImport;
 use App\Imports\KamarImport;
 use App\Imports\ReservasiImport;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HotelMail;
 
 class AdminController extends Controller
 {
@@ -324,6 +326,8 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
 
+        Mail::to('test@gmail.com')->send(new HotelMail());
+
         return redirect()->route('user.reservasi.submit')->with($notification);
 
     }
@@ -405,17 +409,20 @@ class AdminController extends Controller
 
     // Report -----------------------------------------------------------------------------------
 
-    public function report(){
-
-        $kamar = Kamar::all();
+    public function report_user(){
         $users = User::all();
-        $reservasi = Reservasi::all();
-        $report = Report::all();
-
         $user = Auth::user();
-
-        return view('report',compact('report','users','kamar','reservasi'));
-
+        return view('laporan-user',compact('users'));
+    }
+    public function report_kamar(){
+        $kamar = Kamar::all();
+        $user = Auth::user();
+        return view('laporan-kamar',compact('kamar'));
+    }
+    public function report_reservasi(){
+        $checkout = Checkout::all();
+        $user = Auth::user();
+        return view('laporan-reservasi',compact('checkout'));
     }
 
      // PDF -----------------------------------------------------------------------------------
@@ -498,4 +505,5 @@ class AdminController extends Controller
 
         return redirect()->route('admin.report')->with($notification);
     }
+
 }

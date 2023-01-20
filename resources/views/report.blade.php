@@ -43,23 +43,23 @@
                 </thead>
                 <tbody>
                     @php $no=1; @endphp
-                    @foreach($reservasi as $reservasi)
+                    @foreach($checkout as $checkout)
                         <tr>
                             <td>{{$no++}}</td>
-                            <td>{{$reservasi->id}}</td>
-                            <td>{{$reservasi->relationToUser->name}}</td>
-                            <td>{{$reservasi->relationToUser->email}}</td>
-                            <td>{{$reservasi->relationToKamar->kelas}}</td>
-                            <td>{{$reservasi->relationToKamar->harga}}</td>
-                            <td>{{$reservasi->jumlahkamar}}</td>
-                            <td>{{$reservasi->jumlahorang}}</td>
-                            <td>{{$reservasi->datein}}</td>
-                            <td>{{$reservasi->dateout}}</td>
+                            <td>{{$checkout->id}}</td>
+                            <td>{{$checkout->relationToUser->name}}</td>
+                            <td>{{$checkout->relationToUser->email}}</td>
+                            <td>{{$checkout->relationToKamar->kelas}}</td>
+                            <td>{{$checkout->relationToKamar->harga}}</td>
+                            <td>{{$checkout->jumlahkamar}}</td>
+                            <td>{{$checkout->jumlahorang}}</td>
+                            <td>{{$checkout->datein}}</td>
+                            <td>{{$checkout->dateout}}</td>
                             <td>
-                                @if($reservasi->picture !== null)
-                                    <img src="{{asset('storage/picture_kamar/'.$kamar->picture)}}" width="100px">
+                                @if($checkout->picture !== null)
+                                    <img src="{{asset('storage/picture_checkout/'.$checkout->picture)}}" width="100px">
                                 @else
-                                    [Tidak Ada]
+                                        [Gambar Tidak Tersedia]
                                 @endif
                             </td>
                         </tr>
